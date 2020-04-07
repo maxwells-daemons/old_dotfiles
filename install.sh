@@ -1,13 +1,13 @@
 #!/bin/sh
 
 # Config
-COLORSCHEME="gigavolt"
+COLORSCHEME=${1:-gigavolt}
 
 echo "== Setting up =="
 SCRIPT_DIR=$(dirname $(realpath $0))
 DOTFILES_DIR=${SCRIPT_DIR}/dotfiles
 CONFIG_DIR=${HOME}/.config
-mkdir $CONFIG_DIR 2> /dev/null
+mkdir -p $CONFIG_DIR
 
 echo "== Building base16 templates and colorschemes =="
 cd submodules/base16-builder-python
@@ -16,9 +16,8 @@ pybase16.py build -o "${SCRIPT_DIR}/base16_output" -s $COLORSCHEME \
     -t dunst -t i3 -t kitty -t rofi -t shell -t vim -t xresources
 
 echo "== Installing fonts =="
-FONT_DIR=${HOME}/.fonts
-mkdir $FONT_DIR 2> /dev/null
-ln -sf ${SCRIPT_DIR}/fonts/*.ttf $FONT_DIR
+mkdir -p ${HOME}/.fonts
+ln -sf ${SCRIPT_DIR}/fonts/*.ttf ${HOME}/.fonts
 fc-cache
 
 echo "== Configuring Kitty =="
