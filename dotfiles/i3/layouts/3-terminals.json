@@ -1,0 +1,76 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "pixel",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 672,
+       "width": 1120,
+       "x": 0,
+       "y": 0
+    },
+    "name": "kitty",
+    "percent": 0.69453125,
+    "swallows": [
+       {
+       "class": "^kitty$",
+       "instance": "^kitty$",
+       "title": "^kitty$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    // splitv split container with 2 children
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.30546875,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 672,
+               "width": 1120,
+               "x": 0,
+               "y": 0
+            },
+            "name": "kitty",
+            "percent": 0.644549763033175,
+            "swallows": [
+               {
+               "class": "^kitty$",
+               "instance": "^kitty$",
+               "title": "^kitty$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 672,
+               "width": 1120,
+               "x": 0,
+               "y": 0
+            },
+            "name": "kitty",
+            "percent": 0.355450236966825,
+            "swallows": [
+               {
+               "class": "^kitty$",
+               "instance": "^kitty$",
+               "title": "^kitty$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
