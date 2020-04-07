@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [[ -z "$@" ]];
-then ls $HOME/.screenlayout
+then ls ${HOME}/bin/for_robots/screen_layouts
 else
-    eval $("${HOME}/.screenlayout/"$1)
+    eval $("${HOME}/bin/for_robots/screen_layouts/"$1)
 fi
