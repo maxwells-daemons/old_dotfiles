@@ -26,9 +26,9 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec \
 "rofi -show drun -async-pre-read 0 -i -matching glob -no-levenshtein-sort -sidebar-mode -modi \
 drun,\
-scripts:~/.config/rofi/scripts.sh,\
-windows:~/.config/rofi/layouts.sh,\
-screens:~/.config/rofi/screenlayouts.sh,\
+scripts:~/.config/rofi_scripts/scripts.sh,\
+windows:~/.config/rofi_scripts/layouts.sh,\
+screens:~/.config/rofi_scripts/screenlayouts.sh,\
 ssh"
 
 # Enter fullscreen mode for the focused container
@@ -177,7 +177,7 @@ exec_always --no-startup-id xmodmap ~/.Xmodmap
 exec --no-startup-id unclutter --jitter 20
 exec --no-startup-id nm-applet
 exec --no-startup-id dockd --daemon
-exec --no-startup-id "~/bin/setup_screens.sh"
+exec --no-startup-id "~/bin/for_robots/setup_screens.sh"
 exec xautolock -time 10 -locker "i3lock -e -i ~/media/img/wallpapers/map.png" &
 
 ### Autoexecs: programs ###
