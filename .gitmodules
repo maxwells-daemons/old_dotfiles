@@ -1,0 +1,3 @@
+[submodule "submodules/base16-builder-python"]
+	path = submodules/base16-builder-python
+	url = git@github.com:InspectorMustache/base16-builder-python.git
