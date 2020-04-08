@@ -11,10 +11,10 @@ alias xclip='xclip -selection c -r' # xclip copies as ctrl-C, without trailing n
 alias mathematica="env LD_PRELOAD='/usr/lib/libfreetype.so /usr/lib/libz.so' vblank_mode=0 mathematica"
 
 # Base16 256-color support
-BASE16_SHELL="$HOME/.config/base16-shell/"
+BASE16_SHELL="${XDG_CONFIG_HOME}/base16-shell/"
 
 # Set up Liquid Prompt
-source ${HOME}/.config/liquidprompt/liquidprompt
+source ${XDG_CONFIG_HOME}/liquidprompt/liquidprompt
 
 # Python config
 source /usr/bin/virtualenvwrapper.sh

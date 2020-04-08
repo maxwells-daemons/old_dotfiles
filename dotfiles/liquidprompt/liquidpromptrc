@@ -3,8 +3,8 @@
 # LIQUID PROMPT CONFIGURATION FILE #
 ####################################
 
-source ${HOME}/.config/liquidprompt_theme/custom.theme
-LP_PS1_FILE=${HOME}/.config/liquidprompt_theme/custom.ps1
+source ${XDG_CONFIG_HOME}/liquidprompt_theme/custom.theme
+LP_PS1_FILE=${XDG_CONFIG_HOME}/liquidprompt_theme/custom.ps1
 
 #############
 # BEHAVIOUR #
