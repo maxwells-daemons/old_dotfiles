@@ -3,26 +3,36 @@
 # Config
 COLORSCHEME=${1:-gigavolt}
 
-echo "Setting up"
 BASE_DIR=$(dirname $(realpath $0))
 DOTFILES_DIR=${BASE_DIR}/dotfiles
 SCRIPT_DIR=${BASE_DIR}/bin
 CONFIG_DIR=${HOME}/.config
+SUBMODULE_DIR=${BASE_DIR}/submodules
+
+echo "Setting up"
 mkdir -p $CONFIG_DIR
-cd ${BASE_DIR}/submodules/base16-builder-python
+cd ${SUBMODULE_DIR}/base16-builder-python
 
 # echo "Building base16 templates and colorschemes"
-# pybase16.py update
-# pybase16.py build -o "${BASE_DIR}/base16_output" -s $COLORSCHEME \
-#     -t dunst -t i3 -t kitty -t rofi -t shell -t vim -t xresources
+pybase16.py update
+pybase16.py build -o "${BASE_DIR}/base16_output" -s $COLORSCHEME \
+    -t dunst -t i3 -t kitty -t rofi -t shell -t vim -t xresources
 
 echo "Installing base16-shell"
-cp -nr ${BASE_DIR}/submodules/base16-shell ${CONFIG_DIR}
+ln -sf ${SUBMODULE_DIR}/base16-shell ${CONFIG_DIR}
 
 echo "Installing fonts"
 mkdir -p ${HOME}/.fonts
 ln -sf ${BASE_DIR}/fonts/*.ttf ${HOME}/.fonts
 fc-cache
+
+echo "Installing Liquid Prompt"
+mkdir -p ${CONFIG_DIR}/liquidprompt
+mkdir -p ${CONFIG_DIR}/liquidprompt_theme
+ln -sf ${SUBMODULE_DIR}/liquidprompt ${CONFIG_DIR}
+ln -sf ${DOTFILES_DIR}/liquidprompt/liquidpromptrc ${CONFIG_DIR}/liquidpromptrc
+ln -sf ${DOTFILES_DIR}/liquidprompt/custom.ps1 ${CONFIG_DIR}/liquidprompt_theme/custom.ps1
+ln -sf ${DOTFILES_DIR}/liquidprompt/custom.theme ${CONFIG_DIR}/liquidprompt_theme/custom.theme
 
 echo "Configuring Kitty"
 pybase16.py inject -s ${COLORSCHEME} -f ${DOTFILES_DIR}/kitty.conf
