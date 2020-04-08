@@ -11,10 +11,10 @@ CONFIG_DIR=${HOME}/.config
 mkdir -p $CONFIG_DIR
 cd ${BASE_DIR}/submodules/base16-builder-python
 
-echo "Building base16 templates and colorschemes"
-pybase16.py update
-pybase16.py build -o "${BASE_DIR}/base16_output" -s $COLORSCHEME \
-    -t dunst -t i3 -t kitty -t rofi -t shell -t vim -t xresources
+# echo "Building base16 templates and colorschemes"
+# pybase16.py update
+# pybase16.py build -o "${BASE_DIR}/base16_output" -s $COLORSCHEME \
+#     -t dunst -t i3 -t kitty -t rofi -t shell -t vim -t xresources
 
 echo "Installing base16-shell"
 cp -nr ${BASE_DIR}/submodules/base16-shell ${CONFIG_DIR}
@@ -46,6 +46,9 @@ ln -sf ${DOTFILES_DIR}/shell/bashrc ${HOME}/.bashrc
 ln -sf ${DOTFILES_DIR}/X/xinitrc ${HOME}/.xinitrc
 ln -sf ${DOTFILES_DIR}/X/Xmodmap ${HOME}/.Xmodmap
 ln -sf ${DOTFILES_DIR}/X/Xresources ${HOME}/.Xresources
+ln -sf ${DOTFILES_DIR}/git/gitattributes ${HOME}/.gitattributes
+ln -sf ${DOTFILES_DIR}/git/gitconfig ${HOME}/.gitconfig
+ln -sf ${DOTFILES_DIR}/git/gitignore_global ${HOME}/.gitignore_global
 ln -sf ${DOTFILES_DIR}/ghci ${HOME}/.ghci
 ln -sf ${DOTFILES_DIR}/ripgrep_ignore ${CONFIG_DIR}/.ripgrep_ignore
 ln -sf ${DOTFILES_DIR}/compton.conf ${CONFIG_DIR}/compton.conf

@@ -1,0 +1,47 @@
+### Tags ###
+# From: https://github.com/github/gitignore/blob/master/Global/Tags.gitignore
+TAGS
+.TAGS
+!TAGS/
+tags
+.tags
+!tags/
+gtags.files
+GTAGS
+GRTAGS
+GPATH
+GSYMS
+cscope.files
+cscope.out
+cscope.in.out
+cscope.po.out
+
+### Diffs ###
+# From: https://github.com/github/gitignore/blob/master/Global/Diff.gitignore
+*.patch
+*.diff
+
+### Vim ###
+# From: https://github.com/github/gitignore/blob/master/Global/Vim.gitignore
+# Swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
+
+# Session
+Session.vim
+
+# Temporary
+.netrwhist
+*~
+# Auto-generated tag files
+tags
+# Persistent undo
+[._]*.un~
+
+### Misc ###
+*~
+nohup.out
+__pycache__/*
+*.appimage
