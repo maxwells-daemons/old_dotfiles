@@ -3,7 +3,7 @@
 # Config
 COLORSCHEME=${1:-gigavolt}
 
-echo "== Setting up =="
+echo "Setting up"
 BASE_DIR=$(dirname $(realpath $0))
 DOTFILES_DIR=${BASE_DIR}/dotfiles
 SCRIPT_DIR=${BASE_DIR}/bin
@@ -43,5 +43,6 @@ ln -sf ${DOTFILES_DIR}/shell/bashrc ${HOME}/.bashrc
 ln -sf ${DOTFILES_DIR}/X/xinitrc ${HOME}/.xinitrc
 ln -sf ${DOTFILES_DIR}/X/Xmodmap ${HOME}/.Xmodmap
 ln -sf ${DOTFILES_DIR}/X/Xresources ${HOME}/.Xresources
-ln -sf ${DOTFILES_DIR}/ripgrep_ignore ${CONFIG_DIR}/.ripgrep_ignore
 ln -sf ${DOTFILES_DIR}/ghci ${HOME}/.ghci
+ln -sf ${DOTFILES_DIR}/ripgrep_ignore ${CONFIG_DIR}/.ripgrep_ignore
+ln -sf ${DOTFILES_DIR}/compton.conf ${CONFIG_DIR}/compton.conf
