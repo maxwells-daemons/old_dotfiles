@@ -9,12 +9,15 @@ DOTFILES_DIR=${BASE_DIR}/dotfiles
 SCRIPT_DIR=${BASE_DIR}/bin
 CONFIG_DIR=${HOME}/.config
 mkdir -p $CONFIG_DIR
-cd submodules/base16-builder-python
+cd ${BASE_DIR}/submodules/base16-builder-python
 
 echo "Building base16 templates and colorschemes"
 pybase16.py update
 pybase16.py build -o "${BASE_DIR}/base16_output" -s $COLORSCHEME \
     -t dunst -t i3 -t kitty -t rofi -t shell -t vim -t xresources
+
+echo "Installing base16-shell"
+cp -nr ${BASE_DIR}/submodules/base16-shell ${CONFIG_DIR}
 
 echo "Installing fonts"
 mkdir -p ${HOME}/.fonts
