@@ -34,6 +34,9 @@ ln -sf ${DOTFILES_DIR}/liquidprompt/liquidpromptrc ${CONFIG_DIR}/liquidpromptrc
 ln -sf ${DOTFILES_DIR}/liquidprompt/custom.ps1 ${CONFIG_DIR}/liquidprompt_theme/custom.ps1
 ln -sf ${DOTFILES_DIR}/liquidprompt/custom.theme ${CONFIG_DIR}/liquidprompt_theme/custom.theme
 
+echo "Installing EGPU service"
+sudo ln -sf ${DOTFILES_DIR}/setup-egpu.service /etc/systemd/system/setup-egpu.service
+
 echo "Configuring Kitty"
 pybase16.py inject -s ${COLORSCHEME} -f ${DOTFILES_DIR}/kitty.conf
 ln -sf ${DOTFILES_DIR}/kitty.conf ${CONFIG_DIR}/kitty/kitty.conf
