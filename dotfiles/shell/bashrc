@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# Aliases
+alias ls='ls --color -I snap'  # Add colors to ls and hide snap
+alias v='nvim'
+alias rg='rg --ignore-file ~/.config/.ripgrep_ignore'
+alias xclip='xclip -selection c -r' # xclip copies as ctrl-C, without trailing newline
+alias mathematica="env LD_PRELOAD='/usr/lib/libfreetype.so /usr/lib/libz.so' vblank_mode=0 mathematica"
+
+# Powerline config
+PS1='[\u@\h \W]\$ '
+function _update_ps1() {
+    PS1="$(~/.local/bin/powerline-shell $?)"
+}
+
+if [ "$TERM" != "linux" ]; then
+    PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ;} _update_ps1"
+fi
+
+# Base16 shell colors
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
+
+# Python config
+source /usr/bin/virtualenvwrapper.sh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '~/work/google-cloud-sdk/path.bash.inc' ]; then . '~/work/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '~/work/google-cloud-sdk/completion.bash.inc' ]; then . '~/work/google-cloud-sdk/completion.bash.inc'; fi

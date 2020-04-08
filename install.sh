@@ -28,6 +28,15 @@ ln -sf ${DOTFILES_DIR}/kitty.conf ${CONFIG_DIR}/kitty/kitty.conf
 echo "Configuring i3"
 pybase16.py inject -s ${COLORSCHEME} -f ${DOTFILES_DIR}/i3/config
 ln -sf ${DOTFILES_DIR}/i3 ${CONFIG_DIR}/
-
-echo "Configuring rofi"
 ln -sf ${DOTFILES_DIR}/rofi_scripts ${CONFIG_DIR}/
+
+echo "Configuring shell tools"
+pybase16.py inject -s ${COLORSCHEME} -f ${DOTFILES_DIR}/X/Xresources
+ln -sf ${DOTFILES_DIR}/shell/profile ${HOME}/.profile
+ln -sf ${DOTFILES_DIR}/shell/bash_profile ${HOME}/.bash_profile
+ln -sf ${DOTFILES_DIR}/shell/bashrc ${HOME}/.bashrc
+ln -sf ${DOTFILES_DIR}/X/xinitrc ${HOME}/.xinitrc
+ln -sf ${DOTFILES_DIR}/X/Xmodmap ${HOME}/.Xmodmap
+ln -sf ${DOTFILES_DIR}/X/Xresources ${HOME}/.Xresources
+ln -sf ${DOTFILES_DIR}/ripgrep_ignore ${CONFIG_DIR}/.ripgrep_ignore
+ln -sf ${DOTFILES_DIR}/ghci ${HOME}/.ghci
