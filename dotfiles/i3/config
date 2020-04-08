@@ -3,8 +3,10 @@
 
 
 ### Core ###
-set $mod Mod1 # Modifier: Alt
-floating_modifier $mod # Use Mouse+$mod to drag floating windows
+# Modifier: Alt
+set $mod Mod1
+# Use Mouse+$mod to drag floating windows
+floating_modifier $mod
 
 # Kill focused window
 bindsym $mod+Shift+q kill
