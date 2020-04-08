@@ -180,12 +180,11 @@ mode "resize" {
 
 ### Autoexecs ###
 # Setups
-exec_always --no-startup-id compton --config ~/.config/compton.conf -b
+exec_always --no-startup-id ~/bin/for_robots/launch_bar.sh
 exec --no-startup-id unclutter --jitter 20
 exec --no-startup-id nm-applet
 exec --no-startup-id dockd --daemon
-exec --no-startup-id "~/bin/for_robots/setup_screens.sh"
-exec xautolock -time 10 -locker "i3lock -e -i ~/media/img/wallpapers/map.png" &
+exec --no-startup-id xautolock -time 10 -locker "i3lock -e -i ~/media/img/wallpapers/map.png" &
 
 # Programs
 exec --no-startup-id dropbox start

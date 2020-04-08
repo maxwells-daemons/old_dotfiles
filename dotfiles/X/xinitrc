@@ -31,12 +31,16 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
+### Initial setup ###
 udiskie &
 xbindkeys
-exec i3
 xmodmap ~/.Xmodmap
 xrdb ~/.Xresources
+${HOME}/bin/for_robots/setup_screens.sh
 
 ### Setup stylus ###
 # Pressure curve
 xinput --set-prop "Wacom Pen and multitouch sensor Pen Pen (0)" "libinput Tablet Tool Pressurecurve" 0 0.1 0.9 1.0 1.0 1.0 1.0 1.0
+
+### Start graphical session ###
+exec i3
