@@ -30,6 +30,11 @@ pybase16.py inject -s ${COLORSCHEME} -f ${DOTFILES_DIR}/i3/config
 ln -sf ${DOTFILES_DIR}/i3 ${CONFIG_DIR}/
 ln -sf ${DOTFILES_DIR}/rofi_scripts ${CONFIG_DIR}/
 
+echo "Configuring zathura"
+pybase16.py inject -s ${COLORSCHEME} -f ${DOTFILES_DIR}/zathurarc
+mkdir -p ${CONFIG_DIR}/zathura
+ln -sf ${DOTFILES_DIR}/zathurarc ${CONFIG_DIR}/zathura/zathurarc
+
 echo "Configuring shell tools"
 pybase16.py inject -s ${COLORSCHEME} -f ${DOTFILES_DIR}/X/Xresources
 ln -sf ${DOTFILES_DIR}/shell/profile ${HOME}/.profile
