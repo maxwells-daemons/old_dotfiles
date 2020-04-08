@@ -172,21 +172,22 @@
 
 ### Colors
 # %%base16_template: dunst %%
+frame_color = "#e9e7e1"
+separator_color = "#e9e7e1"
+
 [base16_low]
     msg_urgency = low
-    background = "#2c293d"
+    background = "#2d303d"
     foreground = "#a1d2e6"
-    frame_color = "#a1d2e6"
 
 [base16_normal]
     msg_urgency = normal
-    background = "#2c293d"
-    foreground = "#fffdf2"
-    frame_color = "#fffdf2"
+    background = "#5a576e"
+    foreground = "#e9e7e1"
 
 [base16_critical]
     msg_urgency = critical
-    background = "#ffdc2d"
-    foreground = "#212026"
-    frame_color = "#212026"
+    background = "#ff661a"
+    foreground = "#eff0f9"
+
 # %%base16_template_end%%
