@@ -74,7 +74,7 @@ bindsym $mod+d exec \
 -matching glob \
 -no-levenshtein-sort \
 -sidebar-mode \
--modi \ drun,\
+-modi drun,\
 scripts:~/.config/rofi_scripts/scripts.sh,\
 windows:~/.config/rofi_scripts/layouts.sh,\
 screens:~/.config/rofi_scripts/screenlayouts.sh,\
