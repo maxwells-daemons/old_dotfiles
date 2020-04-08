@@ -38,6 +38,11 @@ pybase16.py inject -s ${COLORSCHEME} -f ${DOTFILES_DIR}/zathurarc
 mkdir -p ${CONFIG_DIR}/zathura
 ln -sf ${DOTFILES_DIR}/zathurarc ${CONFIG_DIR}/zathura/zathurarc
 
+echo "Configuring dunst"
+pybase16.py inject -s ${COLORSCHEME} -f ${DOTFILES_DIR}/dunstrc
+mkdir -p ${CONFIG_DIR}/dunst
+ln -sf ${DOTFILES_DIR}/dunstrc ${CONFIG_DIR}/dunst/dunstrc
+
 echo "Configuring shell tools"
 pybase16.py inject -s ${COLORSCHEME} -f ${DOTFILES_DIR}/X/Xresources
 ln -sf ${DOTFILES_DIR}/shell/profile ${HOME}/.profile
