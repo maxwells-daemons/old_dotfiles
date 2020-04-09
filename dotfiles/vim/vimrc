@@ -4,13 +4,18 @@
 """ Begin with tpope's vim-sensible
 runtime! plugin/sensible.vim
 
+" Settings contained within vim-sensible:
+" set encoding=utf8 " Set utf8 as the standard encoding
+" set backspace=indent,eol,start " Sane backspace behavior
+" set incsearch " Highlight matches before search is complete
+" set ruler " Show window measurements in the bottom right
+" set wildmenu " Visual autocomplete for command menu
+
 """ General
 set nocompatible  " Disable vi compatibility
-set encoding=utf8 " Set utf8 as the standard encoding
 set modelines=0 " Disable modelines for security reasons
 set mouse=a " Enable mouse support
 set hidden " Enable background buffers
-set backspace=indent,eol,start " Sane backspace behavior
 set lazyredraw " Do not redraw the screen while executing macros
 set undofile " Persist undo history across multiple sessions
 set ffs=unix,dos,mac " Default to Unix line endings
@@ -88,7 +93,6 @@ nmap <F1> <nop>
 """ Search
 set ignorecase smartcase " Only capital searches are case-sensitive
 set gdefault " Replaces are global by default
-set incsearch " Highlight matches before search is complete
 set hlsearch " Highlight all search hits
 
 " Persistent 'very magic' searches
@@ -108,32 +112,26 @@ syntax on " Enable syntax highlighting
 set t_Co=256 " Enable 256 colors
 colorscheme base16-gigavolt " Set colorscheme
 set showmode " Show current mode (NOTE: overwritten in nvim config)
-set ruler " Show window measurements in the bottom right
 set number " Show current line number
 set relativenumber " Use relative line numbers for all other numbers
 set cursorline " Highlight the current line
-set wildmenu " Visual autocomplete for command menu
 
 set noerrorbells " Disable audio bell
 set novisualbell " Disable visual bell
 
-" Cursor setup
-" See: https://vim.fandom.com/wiki/Change_cursor_shape_in_different_modes
-let &t_SI.="\e[3 q" " Insert mode cursor: underscore
-let &t_SR.="\e[3 q" " Replace mode cursor: underscore
-let &t_EI.="\e[2 q" " Normal and visual mode cursors: block
+""" Plugins (configured separately for Vim and Neovim)
+if !has('nvim')
+    filetype off  " Temporarily disable filetype plugins
+    call plug#begin('~/.vim/plugged')
+        Plug 'tpope/vim-sensible' " Sensible starting defaults
+        Plug 'ntpeters/vim-better-whitespace' " Whitespace stripping on save
+        Plug 'Raimondi/delimitMate' " Autocomplete parentheses, etc
+    call plug#end()
+    filetype plugin indent on " Enable filetype plugins and indent files
 
-""" Plugins
-filetype off  " Temporarily disable filetype plugins
-call plug#begin('~/.vim/plugged')
-    Plug 'tpope/vim-sensible' " Sensible starting defaults
-    Plug 'ntpeters/vim-better-whitespace' " Whitespace stripping on save
-    Plug 'Raimondi/delimitMate' " Autocomplete parentheses, etc
-call plug#end()
-filetype plugin indent on " Enable filetype plugins and indent files
-
-""" Configure vim-better-whitespace
-autocmd BufEnter * EnableStripWhitespaceOnSave  " Strip whitespace on save
-autocmd BufEnter * DisableWhitespace " Disable whitespace highlighting
-let g:strip_whitespace_confirm=0 " Do not ask before stripping whitespace
-let g:show_spaces_that_precede_tabs=1 " Show spaces around tabs
+    """ Configure vim-better-whitespace
+    autocmd BufEnter * EnableStripWhitespaceOnSave  " Strip whitespace on save
+    autocmd BufEnter * DisableWhitespace " Disable whitespace highlighting
+    let g:strip_whitespace_confirm=0 " Do not ask before stripping whitespace
+    let g:show_spaces_that_precede_tabs=1 " Show spaces around tabs
+endif
