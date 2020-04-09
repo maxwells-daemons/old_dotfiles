@@ -13,9 +13,9 @@ mkdir -p $XDG_CONFIG_HOME
 cd $SUBMODULE_DIR/base16-builder-python
 
 echo "Building base16 templates and colorschemes"
-pybase16.py update
-pybase16.py build -o "$BASE_DIR/base16_output" -s $COLORSCHEME \
-    -t dunst -t i3 -t kitty -t rofi -t shell -t vim -t xresources
+# pybase16.py update
+# pybase16.py build -o "$BASE_DIR/base16_output" -s $COLORSCHEME \
+    # -t dunst -t i3 -t kitty -t rofi -t shell -t vim -t xresources
 
 echo "Installing base16-shell"
 ln -sf $SUBMODULE_DIR/base16-shell $XDG_CONFIG_HOME
@@ -39,6 +39,11 @@ sudo ln -sf $DOTFILES_DIR/setup-egpu.service /etc/systemd/system/setup-egpu.serv
 echo "Configuring Kitty"
 pybase16.py inject -s $COLORSCHEME -f $DOTFILES_DIR/kitty.conf
 ln -sf $DOTFILES_DIR/kitty.conf $XDG_CONFIG_HOME/kitty/kitty.conf
+
+echo "Configuring Vim"
+mkdir -p $HOME/.vim/colors
+ln -sf $DOTFILES_DIR/vim/base16-gigavolt.vim $HOME/.vim/colors/base16-gigavolt.vim
+ln -sf $DOTFILES_DIR/vim/vimrc $HOME/.vimrc
 
 echo "Configuring i3"
 pybase16.py inject -s $COLORSCHEME -f $DOTFILES_DIR/i3/config

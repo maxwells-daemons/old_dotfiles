@@ -1,0 +1,135 @@
+""" This vimrc is a small 'core' of modifications relevant to both vim and
+""" neovim. For full editing tasks, use nvim, configured in ~/.config/nvim.
+
+""" Begin with tpope's vim-sensible
+runtime! plugin/sensible.vim
+
+""" General
+set nocompatible  " Disable vi compatibility
+set encoding=utf8 " Set utf8 as the standard encoding
+set modelines=0 " Disable modelines for security reasons
+set mouse=a " Enable mouse support
+set clipboard=unnamedplus " Use system clipboard
+set hidden " Enable background buffers
+set backspace=indent,eol,start " Sane backspace behavior
+set lazyredraw " Do not redraw the screen while executing macros
+set undofile " Persist undo history across multiple sessions
+set ffs=unix,dos,mac " Default to Unix line endings
+
+" Add multi-line movement to jump list
+nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
+nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
+
+" Set keypress timeout
+set ttimeoutlen=0 " NOTE: if this causes issues, set to 5; reduces time to esc
+set timeoutlen=1000
+
+" Avoid redrawing on every entered character by turning off arabic shaping
+if has('arabic')
+    set noarabicshape
+endif
+
+""" Mappings
+" Use <Space> as the leader
+let mapleader = "\<Space>"
+
+" , repeats last movement in normal and visual mode
+nnoremap , ;
+vnoremap , ;
+
+" < reverses last movement in normal mode
+nnoremap < ,
+
+" ; jumps between matching braces
+nnoremap ; %
+
+" ' jumps to a mark
+nnoremap ' `
+
+" ` activates the macro @a
+nnoremap ` @a
+
+" Enable repetition and macros across a visual selection
+vnoremap . :normal .<CR>
+vnoremap ` :normal @a<CR>
+
+" <Space>/ clears highlighting
+nnoremap <leader>/ :noh<cr>
+
+" :W sudo saves the file
+" (useful for handling the permission-denied error)
+command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+
+""" Window management
+" tt opens a new tab
+nnoremap <silent> tt :tabnew<CR>
+
+" vv opens a vertical split and ss opens a horizontal split
+nnoremap <silent> vv :vsp<CR>
+nnoremap <silent> ss :sp<CR>
+
+" Move between splits with <Ctrl>-HJKL
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Return to last edit position when opening files
+" From: https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" Disable F1 (help) mapping
+nmap <F1> <nop>
+
+""" Search
+set ignorecase smartcase " Only capital searches are case-sensitive
+set gdefault " Replaces are global by default
+set incsearch " Highlight matches before search is complete
+set hlsearch " Highlight all search hits
+
+" Persistent 'very magic' searches
+nmap / /\v
+nmap ? ?\v
+
+""" Tabs
+set tabstop=4 " Visual spaces per tab character
+set softtabstop=4 " Spaces per soft-tab
+set shiftwidth=4 " Amount to shift with < and >
+set expandtab " Use <TAB> to insert spaces
+
+""" Aesthetics
+set termguicolors " Enable GUI colors in terminal mode
+set showcmd  " Show partial commands in the bottom bar
+syntax on " Enable syntax highlighting
+set t_Co=256 " Enable 256 colors
+colorscheme base16-gigavolt " Set colorscheme
+set showmode " Show current mode (NOTE: overwritten in nvim config)
+set ruler " Show window measurements in the bottom right
+set number " Show current line number
+set relativenumber " Use relative line numbers for all other numbers
+set cursorline " Highlight the current line
+set wildmenu " Visual autocomplete for command menu
+
+set noerrorbells " Disable audio bell
+set novisualbell " Disable visual bell
+
+" Cursor setup
+" See: https://vim.fandom.com/wiki/Change_cursor_shape_in_different_modes
+let &t_SI.="\e[3 q" " Insert mode cursor: underscore
+let &t_SR.="\e[3 q" " Replace mode cursor: underscore
+let &t_EI.="\e[2 q" " Normal and visual mode cursors: block
+
+""" Plugins
+filetype off  " Temporarily disable filetype plugins
+call plug#begin('~/.vim/plugged')
+    Plug 'tpope/vim-sensible' " Sensible starting defaults
+    Plug 'ntpeters/vim-better-whitespace' " Whitespace stripping on save
+    Plug 'Raimondi/delimitMate' " Autocomplete parentheses, etc
+call plug#end()
+filetype plugin indent on " Enable filetype plugins and indent files
+
+""" Configure vim-better-whitespace
+autocmd BufEnter * EnableStripWhitespaceOnSave  " Strip whitespace on save
+autocmd BufEnter * DisableWhitespace " Disable whitespace highlighting
+let g:strip_whitespace_confirm=0 " Do not ask before stripping whitespace
+let g:show_spaces_that_precede_tabs=1 " Show spaces around tabs
