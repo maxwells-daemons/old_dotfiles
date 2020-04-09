@@ -9,12 +9,16 @@ set nocompatible  " Disable vi compatibility
 set encoding=utf8 " Set utf8 as the standard encoding
 set modelines=0 " Disable modelines for security reasons
 set mouse=a " Enable mouse support
-set clipboard=unnamedplus " Use system clipboard
 set hidden " Enable background buffers
 set backspace=indent,eol,start " Sane backspace behavior
 set lazyredraw " Do not redraw the screen while executing macros
 set undofile " Persist undo history across multiple sessions
 set ffs=unix,dos,mac " Default to Unix line endings
+set backupcopy=yes " Modify files in place
+
+" Use system clipboard
+set clipboard=unnamed
+set clipboard+=unnamedplus
 
 " Add multi-line movement to jump list
 nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
