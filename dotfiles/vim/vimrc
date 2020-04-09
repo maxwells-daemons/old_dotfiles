@@ -20,8 +20,10 @@ set mouse=a " Enable mouse support
 set hidden " Enable background buffers
 set lazyredraw " Do not redraw the screen while executing macros
 set undofile " Persist undo history across multiple sessions
+set undodir=~/.vim/undo " Set undo directory
 set ffs=unix,dos,mac " Default to Unix line endings
 set backupcopy=yes " Modify files in place
+set updatetime=300 " Write swap files to disk every 300ms
 
 " Use system clipboard
 set clipboard=unnamed
@@ -70,14 +72,6 @@ nnoremap <leader>/ :noh<cr>
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
-
-""" Window management
-" tt opens a new tab
-nnoremap <silent> tt :tabnew<CR>
-
-" vv opens a vertical split and ss opens a horizontal split
-nnoremap <silent> vv :vsp<CR>
-nnoremap <silent> ss :sp<CR>
 
 " Move between splits with <Ctrl>-HJKL
 map <C-j> <C-W>j

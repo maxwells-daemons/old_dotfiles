@@ -37,6 +37,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64
 export WORKON_HOME=${HOME}/.virtualenvs  # Python virtual environments
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${HOME}/.mujoco/bin  # MuJoCo
 export NETHACKOPTIONS=noautopickup  # Nethack
+export FZF_DEFAULT_COMMAND 'rg --files --no-ignore-vcs --hidden'
 
 # Python config
 export PATH="$HOME/.poetry/bin:$PATH"  # Poetry
