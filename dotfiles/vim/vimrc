@@ -1,8 +1,10 @@
 """ This vimrc is a small 'core' of modifications relevant to both vim and
 """ neovim. For full editing tasks, use nvim, configured in ~/.config/nvim.
 
-""" Begin with tpope's vim-sensible
-runtime! plugin/sensible.vim
+""" Begin with tpope's vim-sensible (already run in neovim config)
+if !has('nvim')
+    runtime! plugin/sensible.vim
+endif
 
 " Settings contained within vim-sensible:
 " set encoding=utf8 " Set utf8 as the standard encoding
@@ -115,6 +117,7 @@ set showmode " Show current mode (NOTE: overwritten in nvim config)
 set number " Show current line number
 set relativenumber " Use relative line numbers for all other numbers
 set cursorline " Highlight the current line
+set colorcolumn=80  " Show a column on line 80
 
 set noerrorbells " Disable audio bell
 set novisualbell " Disable visual bell
