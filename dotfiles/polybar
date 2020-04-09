@@ -1,0 +1,746 @@
+;=====================================================
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;=====================================================
+
+[colors]
+background = ${xrdb:color0:#202126}
+background-select = ${xrdb:color18:#5a576e}
+
+foreground = ${xrdb:color7:#e9e7e1}
+foreground-dark = ${xrdb:color2:#f2e6a9}
+foreground-blue = ${xrdb:color8:#a1d2e6}
+foreground-purple = ${xrdb:color20:#cad3ff}
+
+red = ${xrdb:color1:#ff661a}
+green = ${xrdb:color16:#19f988}
+yellow = ${xrdb:color3:#ffdc2d}
+pink = ${xrdb:color6:#fb6acb}
+lightBlue = ${xrdb:color4:#40bfff}
+purple = ${xrdb:color5:#ae94f9}
+blue = ${xrdb:color17:#6187ff}
+
+
+; Main monitor bar
+[bar/main]
+
+; Monitor config
+monitor = ${file:~/.leftmonitor:eDP1}
+
+; Size and shape
+width = 100%
+height = 50
+offset-x = 0
+offset-y = 10
+radius = 0.0
+fixed-center = false
+line-size = 3
+border-size = 0
+bottom = false
+separator =
+
+; Colors
+background = ${colors.background}
+foreground = ${colors.foreground}
+line-color = ${colors.red}
+border-color = #00000000
+
+; Fonts
+font-0 = fixed:pixelsize=20;1
+font-1 = unifont:fontformat=truetype:size=20:antialias=false;0
+font-2 = siji:pixelsize=20;1
+font-3 = FontAwesome:size=24;0
+; Used for i3touchmenu
+font-4 = FontAwesome5Brands:style=Solid:pixelsize=18:antialias=false;3
+
+; Modules
+padding-left = 0
+padding-right = 2
+module-margin-left = 1
+module-margin-right = 2
+
+; TODO: fix and enable rotate button
+; modules-left = i3 i3touchmenu rotate-button memory cpu
+modules-left = i3 i3touchmenu memory cpu
+modules-center =
+modules-right = volume wireless-network wired-network battery date
+
+; WM settings
+tray-position = right
+tray-padding = 2
+tray-transparent = true
+tray-scale = 1
+tray-maxsize = 30
+tray-offset-y = -16
+wm-restack = i3
+override-redirect = false
+
+
+; Shorter main monitor bar
+[bar/short]
+
+; Monitor config
+monitor = ${file:~/.leftmonitor:eDP1}
+
+; Size and shape
+width = 100%
+height = 50
+offset-x = 0
+offset-y = 10
+radius = 0.0
+fixed-center = false
+line-size = 3
+border-size = 0
+bottom = false
+separator =
+
+; Colors
+background = ${colors.background}
+foreground = ${colors.foreground}
+line-color = ${colors.red}
+border-color = #00000000
+
+; Fonts
+font-0 = fixed:pixelsize=20;1
+font-1 = unifont:fontformat=truetype:size=20:antialias=false;0
+font-2 = siji:pixelsize=20;1
+font-3 = FontAwesome:size=24;0
+; Used for i3touchmenu
+font-4 = FontAwesome5Brands:style=Solid:pixelsize=18:antialias=false;3
+
+; Modules
+padding-left = 0
+padding-right = 2
+module-margin-left = 1
+module-margin-right = 2
+
+modules-left = i3 i3touchmenu rotate-button
+modules-center =
+modules-right = volume wireless-network wired-network battery
+
+; WM settings
+tray-position = right
+tray-padding = 2
+tray-transparent = true
+tray-scale = 1.3
+tray-maxsize = 30
+wm-restack = i3
+override-redirect = false
+
+
+; Left (horizontal) monitor bar
+[bar/horizmonitor]
+
+; Monitor config
+monitor = ${file:~/.leftmonitor:DP1}
+
+; Size and shape
+width = 100%
+height = 65
+offset-x = 0
+offset-y = 0
+radius = 0.0
+fixed-center = false
+line-size = 3
+border-size = 0
+bottom = false
+separator =
+
+; Colors
+background = ${colors.background}
+foreground = ${colors.foreground}
+line-color = ${colors.red}
+border-color = #00000000
+
+; Fonts
+font-0 = fixed:pixelsize=20;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=20;1
+font-3 = FontAwesome:size=24;0
+
+; Modules
+padding-left = 0
+padding-right = 2
+module-margin-left = 1
+module-margin-right = 2
+
+modules-left = i3 memory cpu gpu
+modules-center =
+modules-right = volume wireless-network wired-network battery date
+
+; WM settings
+tray-position = right
+tray-padding = 2
+tray-transparent = false
+tray-scale = 1.25
+tray-maxsize = 30
+tray-offset-y = -16
+tray-background = ${colors.background}
+wm-restack = i3
+override-redirect = false
+
+
+; Right (vertical) monitor bar
+[bar/vertmonitor]
+
+; Monitor config
+monitor = ${file:~/.rightmonitor:DP2}
+
+; Size and shape
+width = 100%
+height = 50
+offset-x = 0
+offset-y = 0
+radius = 0.0
+fixed-center = false
+line-size = 3
+border-size = 0
+bottom = false
+separator =
+
+; Colors
+background = ${colors.background}
+foreground = ${colors.foreground}
+line-color = ${colors.red}
+border-color = #00000000
+
+; Fonts
+font-0 = fixed:pixelsize=20;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=20;1
+font-3 = FontAwesome:size=24;0
+
+; Modules
+padding-left = 0
+padding-right = 2
+module-margin-left = 1
+module-margin-right = 2
+wm-restack = i3
+override-redirect = false
+
+modules-left = i3
+modules-center =
+modules-right =
+
+
+; i3 touch monitor bar
+[bar/touch]
+
+; Monitor config
+monitor = ${file:~/.leftmonitor:eDP1}
+
+; Size and shape
+width = 100%
+height = 70
+offset-x = 0
+offset-y = 0
+radius = 0.0
+fixed-center = true
+line-size = 3
+border-size = 0
+bottom = false
+separator =
+
+; Enable message receipt
+enable-ipc = true
+
+; Colors
+background = ${colors.background}
+foreground = ${colors.foreground}
+line-color = ${colors.red}
+border-color = #00000000
+
+; Fonts
+font-0 = fixed:pixelsize=20;1
+font-1 = unifont:fontformat=truetype:size=20:antialias=false;0
+font-2 = siji:pixelsize=20;1
+font-3 = FontAwesome:size=40;18
+font-4 = FontAwesome:size=40;18
+
+; Modules
+padding-left = 0
+padding-right = 2
+module-margin-left = 1
+module-margin-right = 2
+wm-restack = i3
+override-redirect = false
+
+modules-left = i3touchmenu
+modules-center =
+modules-right =
+
+
+; Module settings
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-dark}
+format-prefix-underline = ${colors.yellow}
+
+label-layout = %layout%
+label-layout-underline = ${colors.yellow}
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-background = ${colors.yellow}
+label-indicator-underline = ${colors.yellow}
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+enable-click = true
+strip-wsnumbers = true
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+; Workspaces
+ws-icon-0 = 2:terminals; [2]
+ws-icon-1 = 1:browser; [1]
+ws-icon-2 = 10:chat; [0]
+ws-icon-3 = 3:code; [3]
+ws-icon-4 = 9:music;♫ [9]
+ws-icon-5 = 8; [8]
+ws-icon-6 = 4:book; [4]
+ws-icon-7 = 5; [5]
+ws-icon-8 = 6; [6]
+ws-icon-9 = 7; [7]
+ws-icon-default = 
+
+label-mode-padding = 2
+label-mode-foreground = ${colors.foreground}
+label-mode-background = ${colors.purple}
+
+; focused = Active workspace on focused monitor
+label-focused = %icon%
+label-focused-foreground = ${colors.lightBlue}
+label-focused-underline = ${colors.lightBlue}
+label-focused-padding = 2
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %icon%
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %icon%
+label-visible-underline = ${colors.foreground}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %icon%
+label-urgent-foreground = ${colors.pink}
+label-urgent-padding = ${self.label-focused-padding}
+label-urgent-underline = ${self.label-urgent-foreground}
+
+[module/cpu]
+type = internal/cpu
+interval = 5
+format-prefix = "CPU: "
+format-prefix-foreground = ${colors.foreground-dark}
+label = %percentage%%
+
+[module/gpu]
+type = custom/script
+exec = "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits"
+exec-if = "lspci | grep -q 'VGA.*NVIDIA'"
+interval = 5
+format-prefix = "GPU: "
+format-prefix-foreground = ${colors.foreground-dark}
+label = %output%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = "RAM: "
+format-prefix-foreground = ${colors.foreground-dark}
+label = %percentage_used%%
+
+[module/wireless-network]
+type = internal/network
+interface = wlp5s0
+interval = 3.0
+ping-interval = 10
+
+format-connected = <ramp-signal> <label-connected>
+label-connected = %essid%
+label-disconnected =    not connected
+label-disconnected-foreground = #66
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+
+animation-packetloss-0 = 
+animation-packetloss-0-foreground = ${colors.yellow}
+animation-packetloss-1 = 
+animation-packetloss-1-foreground = ${bar/top.foreground}
+animation-packetloss-framerate = 500
+
+[module/wired-network]
+type = internal/network
+interface = enp4s0
+interval = 3.0
+
+label-connected =  %{T3}%local_ip%%{T-}
+label-disconnected = AAAA
+label-disconnected-foreground = #66
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = "%m / %d / %Y"
+
+time = %I:%M
+time-alt = %H:%M:%S
+
+label =  %date%   %time%
+
+format-prefix = 
+format-prefix-foreground = ${colors.foreground-dark}
+jformat-underline = ${colors.blue}
+
+
+[module/volume]
+type = internal/volume
+master-mixer = Master
+
+format-volume = <label-volume> <bar-volume>
+label-volume = 
+label-volume-foreground = ${root.foreground}
+
+format-muted-prefix = " "
+format-muted-foreground = ${colors.foreground}
+label-muted = sound muted
+
+bar-volume-width = 10
+bar-volume-foreground-0 = ${colors.green}
+bar-volume-foreground-1 = ${colors.green}
+bar-volume-foreground-2 = ${colors.yellow}
+bar-volume-foreground-3 = ${colors.yellow}
+bar-volume-foreground-4 = ${colors.yellow}
+bar-volume-foreground-5 = ${colors.red}
+bar-volume-foreground-6 = ${colors.red}
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.background-select}
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+sink = alsa_output.pci-0000_12_00.3.analog-stereo
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+
+[module/battery]
+type = internal/battery
+full-at = 95
+battery = BAT0
+adapter = ADP1
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = ${colors.red}
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = ${colors.yellow}
+ramp-capacity-2 = 
+ramp-capacity-2-foreground = ${colors.yellow}
+ramp-capacity-3 = 
+ramp-capacity-3-foreground = ${colors.foreground}
+ramp-capacity-4 = 
+ramp-capacity-4-foreground = ${colors.foreground}
+
+bar-capacity-width = 10
+bar-capacity-format = %{+u}%{+o}%fill%%empty%%{-u}%{-o}
+bar-capacity-fill = █
+bar-capacity-fill-foreground = ${colors.foreground-blue}
+bar-capacity-fill-font = 3
+bar-capacity-empty = █
+bar-capacity-empty-font = 3
+bar-capacity-empty-foreground = ${colors.lightBlue}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 1
+margin-bottom = 1
+
+; vim:ft=dosini
+
+[module/i3touchmenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+;; Open the menu
+label-open = ""
+label-open-foreground = ${colors.foreground}
+
+;; Close the menu
+label-close = 
+label-close-foreground = ${colors.yellow}
+label-separator = "  "
+label-separator-foreground = ${colors.foreground-dark}
+
+;; Launcher
+;menu-0-0 = 
+;menu-0-0-exec = menu-open-1
+
+;; Scratchpad
+menu-0-0 = 
+menu-0-0-exec = i3-msg 'scratchpad show'
+
+;; Move
+menu-0-1 = 
+menu-0-1-exec = menu-open-2
+
+;; Layout
+menu-0-2 = 
+menu-0-2-exec = menu-open-3
+
+;; Split
+menu-0-3 = 
+menu-0-3-exec = menu-open-4
+
+;; Resize
+;menu-0-4 = 
+;menu-0-4-exec = menu-open-5
+
+;; Move to workspace
+menu-0-4 = 
+menu-0-4-exec = menu-open-6
+
+;; Kill
+menu-0-5 = 
+menu-0-5-exec = menu-open-7
+
+;; Power
+;menu-0-7 ="    "
+;menu-0-7-exec = menu-open-8
+
+;; Launcher: Back to main menu
+menu-1-0 = 
+menu-1-0-exec = menu-open-0
+
+;; Launcher: chromium
+menu-1-1=
+menu-1-1-exec= chromium &
+
+:: Launcher: urxvt
+menu-1-2="    "
+menu-1-2-exec = urxvt &
+
+;; Move: Back to main menu
+menu-2-0 = 
+menu-2-0-exec = menu-open-0
+
+;; Move: Left
+menu-2-1 = 
+menu-2-1-exec = i3-msg 'move left'
+
+;; Move: Right
+menu-2-2 = 
+menu-2-2-exec = i3-msg 'move right'
+
+;; Move: Up
+menu-2-3 = 
+menu-2-3-exec = i3-msg 'move up'
+
+;; Move: Down
+menu-2-4 = "    "
+menu-2-4-exec = i3-msg 'move down'
+
+;; Layout: Back to main menu
+menu-3-0 = 
+menu-3-0-exec = menu-open-0
+
+;; Layout: Split
+menu-3-1 = 
+menu-3-1-exec = i3-msg 'layout toggle split'
+
+;; Layout: Tabbed
+menu-3-2 = 
+menu-3-2-exec = i3-msg 'layout tabbed'
+
+;; Layout: Stacking
+menu-3-3 = 
+menu-3-3-exec = i3-msg 'layout stacking'
+
+;; Layout: Toggle floating
+menu-3-4 = "    "
+menu-3-4-exec = i3-msg 'floating toggle'
+
+;; Split: Back to main menu
+menu-4-0 = 
+menu-4-0-exec = menu-open-0
+
+;; Split: Vertical
+menu-4-1 = 
+menu-4-1-exec = i3-msg 'split v'
+
+;; Split: Horizontal
+menu-4-2 = "    "
+menu-4-2-exec = i3-msg 'split h'
+
+;; Resize: Back to main menu
+menu-5-0 = 
+menu-5-0-exec = menu-open-0
+
+;; Resize: Grow height
+menu-5-1 = 
+menu-5-1-exec = i3-msg 'resize grow height 5 px or 5 ppt'
+
+;; Resize: Shrink height
+menu-5-2 =
+menu-5-2-exec = i3-msg 'resize shrink height 5 px or 5 ppt'
+
+;; Resize: Grow width
+menu-5-3 = 
+menu-5-3-exec = i3-msg 'resize grow width 5 px or 5 ppt'
+
+;; Resize: Shrink width
+menu-5-4 = "    "
+menu-5-4-exec = i3-msg 'resize shrink width 5 px or 5 ppt'
+
+;; Move to workspace: Back to main menu
+menu-6-0 = 
+menu-6-0-exec = menu-open-0
+
+ws-icon-0 = 2:terminals; [2]
+ws-icon-1 = 1:browser; [1]
+ws-icon-2 = 10:chat; [0]
+ws-icon-3 = 3:code; [3]
+ws-icon-4 = 9:music;♫ [9]
+ws-icon-5 = 8; [8]
+ws-icon-6 = 4:book; [4]
+ws-icon-7 = 5; [5]
+ws-icon-8 = 6; [6]
+ws-icon-9 = 7; [7]
+
+;; Move to workspace: 1
+menu-6-1 = 
+menu-6-1-exec = i3-msg 'move container to workspace 1:browser'
+
+;; Move to workspace: 2
+menu-6-2 = 
+menu-6-2-exec = i3-msg 'move container to workspace 2:terminals'
+
+;; Move to workspace: 3
+menu-6-3 = 
+menu-6-3-exec = i3-msg 'move container to workspace 3:code'
+
+;; Move to workspace: 4
+menu-6-4 = 
+menu-6-4-exec = i3-msg 'move container to workspace 4:book'
+
+;; Move to workspace: 5
+menu-6-5 = 
+menu-6-5-exec = i3-msg 'move container to workspace 5'
+
+;; Move to workspace: 6
+menu-6-6 = 
+menu-6-6-exec = i3-msg 'move container to workspace 6'
+
+;; Move to workspace: 7
+menu-6-7 = 
+menu-6-7-exec = i3-msg 'move container to workspace 7'
+
+;; Move to workspace: 8
+menu-6-8 = 
+menu-6-8-exec = i3-msg 'move container to workspace 8'
+
+;; Move to workspace: 9
+menu-6-9 = ♫
+menu-6-9-exec = i3-msg 'move container to workspace 9:music'
+
+;; Move to workspace: 10
+menu-6-10 = "     "
+menu-6-10-exec = i3-msg 'move container to workspace 10:chat'
+
+;; Kill: Back to main menu
+menu-7-0 = 
+menu-7-0-exec = menu-open-0
+
+;; Kill: Kill
+menu-7-1 = "You sure?        "
+menu-7-1-exec = i3-msg 'kill'
+
+;; Power: Back to main menu
+menu-8-0 = 
+menu-8-0-exec = menu-open-0
+
+;; Power: Screen off
+menu-8-1 = 
+menu-8-1-exec = xset dpms force off
+
+;; Power: Reboot
+menu-8-2 = 
+menu-8-2-exec = shutdown -r now
+
+;; Power: Shutdown
+menu-8-3 = "    "
+menu-8-3-exec = shutdown -h now
+
+[module/rotate-button]
+type = custom/text
+content = 
+click-left = bash ~/bin/toggle_tablet.sh
+
+[module/temperature]
+type = internal/temperature
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 0.5
+
+; Thermal zone to use
+; To list all the zone types, run
+; $ for i in /sys/class/thermal/thermal_zone*; do echo "$i: $(<$i/type)"; done
+; Default: 0
+thermal-zone = 0
+
+; Full path of temperature sysfs path
+; Use `sensors` to find preferred temperature source, then run
+; $ for i in /sys/class/hwmon/hwmon*/temp*_input; do echo "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*})) $(readlink -f $i)"; done
+; to find path to desired file
+; Default reverts to thermal zone setting
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input
+
+; Threshold temperature to display warning label (in degrees celsius)
+; Default: 80
+warn-temperature = 60
