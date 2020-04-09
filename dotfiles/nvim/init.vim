@@ -50,6 +50,7 @@ call plug#begin(stdpath('data') . '/plugged')
 
     " TODO: install and configure coc
     " TODO: install and configure Ale
+    " TODO: Python setup
 
     " Dependencies
     Plug 'tpope/vim-repeat' " Enables repeating certain plugins with .
