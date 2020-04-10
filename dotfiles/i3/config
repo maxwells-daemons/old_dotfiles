@@ -49,8 +49,8 @@ bindsym $mod+Shift+Right move right
 
 ### Container control ###
 # Splits (horizontal, vertical)
-bindsym $mod+c split h
-bindsym $mod+v split v
+bindsym $mod+v split h
+bindsym $mod+c split v
 
 # Change container layout (toggle split, stacking/tabbed, floating)
 bindsym $mod+q layout toggle split
