@@ -75,4 +75,5 @@ ln -sf $DOTFILES_DIR/git/gitignore_global $HOME/.gitignore_global
 ln -sf $DOTFILES_DIR/ghci $HOME/.ghci
 ln -sf $DOTFILES_DIR/ripgrep_ignore $XDG_CONFIG_HOME/.ripgrep_ignore
 ln -sf $DOTFILES_DIR/compton.conf $XDG_CONFIG_HOME/compton.conf
+ln -sf $DOTFILES_DIR/flake8 $XDG_CONFIG_HOME/flake8
 ln -sf $DOTFILES_DIR/polybar $XDG_CONFIG_HOME/polybar/config

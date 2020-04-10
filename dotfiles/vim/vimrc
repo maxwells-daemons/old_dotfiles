@@ -69,9 +69,11 @@ vnoremap ` :normal @a<CR>
 " <Space>/ clears highlighting
 nnoremap <leader>/ :noh<cr>
 
-" :W sudo saves the file
+" In vim, :W sudo saves the file
 " (useful for handling the permission-denied error)
-command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+if !has('nvim')
+    command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+endif
 
 " Move between splits with <Ctrl>-HJKL
 map <C-j> <C-W>j

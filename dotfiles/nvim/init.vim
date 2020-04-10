@@ -7,15 +7,20 @@ set runtimepath+=~/.vim,~/.vim/after,~/.vim/autoload
 " Core modifications are in ~/.vimrc
 source ~/.vimrc
 
+" Tags are stored locally
+set tags=./tags
+
 """ Aesthetics
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1  " Enable true-color support
 set showmode! " Do not show current mode (overwrites vimrc default)
+set signcolumn=yes  " Keep sign column open
 
 """ Plugins
 filetype off  " Temporarily disable filetype plugins
 call plug#begin(stdpath('data') . '/plugged')
     " Editing
     Plug 'tpope/vim-sensible' " Sensible starting defaults
+    Plug 'lambdalisue/suda.vim' " Read and write files with sudo
     Plug 'ntpeters/vim-better-whitespace' " Whitespace stripping on save
     Plug 'Raimondi/delimitMate' " Autocomplete parentheses, etc
     Plug 'tpope/vim-surround' " Edit surrounding pairs
@@ -29,7 +34,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'glts/vim-textobj-comment' " Text object c for comments
 
     " Window and file management
-    Plug 'tpope/vim-unimpaired' " Paired actions like [q, [l, and [b
+    Plug 'drmingdrmer/vim-toggle-quickfix' " Toggle quickfix and loclist
     Plug 'qpkorr/vim-bufkill' " :BD to close a buffer without closing the split
     Plug 'preservim/nerdtree' " Directory browser
     Plug 'Xuyuanp/nerdtree-git-plugin' " Integrate git with NERDTree
@@ -40,17 +45,30 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'tpope/vim-fugitive' " Git wrapper
     Plug 'simnalamburt/vim-mundo' " Undo tree
     Plug 'liuchengxu/vista.vim' " Tag viewer
+    Plug 'dense-analysis/ale' " Linting engine
+    Plug 'vimwiki/vimwiki' " Personal wiki
 
     " Aesthetics
+    Plug 'sheerun/vim-polyglot' " Language pack
     Plug 'vim-airline/vim-airline' " Status line
     Plug 'vim-airline/vim-airline-themes' " Themes for vim-airline
     Plug 'mhinz/vim-signify' " See git changes in gutter and statusline
     Plug 'kshenoy/vim-signature' " Display marks in gutter
     Plug 'Yggdroot/indentLine' " See indentation levels
+    Plug 'RRethy/vim-illuminate' " Highlight the word under the cursor
 
     " TODO: install and configure coc
-    " TODO: install and configure Ale
-    " TODO: Python setup
+
+    " Python
+    " Semantic syntax highlighting
+    Plug 'numirias/semshi', {'for': 'python', 'do': ':UpdateRemotePlugins'}
+    " Better indentation
+    Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
+    " Text objects for classes (C), functions (f), and docstrings (d)
+    Plug 'jeetsukumaran/vim-pythonsense', {'for': 'python'}
+    " Work with virtualenvs
+    Plug 'jmcantrell/vim-virtualenv', {'for': 'python'}
+    Plug 'petobens/poet-v', {'for': 'python'}
 
     " Dependencies
     Plug 'tpope/vim-repeat' " Enables repeating certain plugins with .
@@ -58,15 +76,26 @@ call plug#begin(stdpath('data') . '/plugged')
 call plug#end()
 filetype plugin indent on " Enable filetype plugins and indent files
 
-""" Mappings
-" Disable <p mapping (from vim-unimpaired) in normal mode to regain left-shift
-nunmap <
+""" Mappings (movement)
+let g:targets_nl = 'nN' " Select next pair text object with n and last with N
+
+""" Mappings (UI)
+" ]b and [b move to next and previous buffers
+noremap ]b :bn<CR>
+noremap [b :bp<CR>
+
+" <leader>c splits to the right
+noremap <leader>c :vsp<CR>
+" <leader>v splits below
+noremap <leader>v :sp<CR>
+
+" <leader>q toggles quickfix
+noremap <leader>q :call togglequickfix#ToggleQuickfix()<CR>
+" <leader>l toggles loclist
+noremap <leader>l :call togglequickfix#ToggleLocation()<CR>
 
 " <leader>n opens or closes NERDTree
 noremap <leader>n :NERDTreeToggle<CR>
-
-" targets-vim
-let g:targets_nl = 'nN' " Select next text object with n and last with N
 
 " fzf (fuzzy-finding)
 " <leader>f searches all files
@@ -75,21 +104,26 @@ nnoremap <leader>f :Files<CR>
 nnoremap <leader>F :GFiles<CR>
 " <leader>b searches all buffers
 nnoremap <leader>b :Buffers<CR>
-" <leader>t searches all tags in the current buffer
-nnoremap <leader>t :BTags<CR>
-" <leader>T searches all tags in the current project
-nnoremap <leader>T :Tags<CR>
 
-" <leader>v launches Vista (a tag browser)
-nnoremap <leader>v :Vista!!<CR>
+" <leader>t toggles Vista (a tag browser)
+nnoremap <leader>t :Vista!!<CR>
 
-""" Configure vim-better-whitespace
+" <leader>g toggles Git
+nnoremap <leader>g :Git<CR>
+
+" Disable bufkill mappings
+let g:BufKillCreateMappings = 0
+
+""" Configure suda
+let g:suda_smart_edit = 1  " Allow automatically opening files with sudo
+
+""" Configure better-whitespace
 autocmd BufEnter * EnableStripWhitespaceOnSave  " Strip whitespace on save
 autocmd BufEnter * DisableWhitespace " Disable whitespace highlighting
 let g:strip_whitespace_confirm = 0 " Do not ask before stripping whitespace
 let g:show_spaces_that_precede_tabs = 1 " Show spaces around tabs
 
-""" Configure vim-sneak
+""" Configure sneak
 let g:sneak#label = 1  " Label mode assigns a label to each match
 highlight Sneak guifg=red guibg=none ctermfg=red ctermbg=none
 
@@ -105,7 +139,7 @@ let NERDTreeMinimalUI = 1 " Disable bookmark and help hints
 " Ignore some files
 let NERDTreeIgnore = ['\.pyc$', '__pycache__$[[dir]]']
 
-" Set up git symbols
+" Set up Git symbols
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "!",
     \ "Staged"    : "+",
@@ -119,7 +153,7 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
-""" Set up fzf colors
+""" Set up FZF colors
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -135,7 +169,7 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
-""" Configure vim-signify
+""" Configure Signify
 let g:signify_vcs_list = ['git']
 let g:signify_line_highlight = 0
 let g:signify_sign_change = '~'
@@ -144,7 +178,31 @@ let g:signify_sign_change = '~'
 let g:vista#renderer#enable_icon = 0
 let g:vista_sidebar_width = 60
 
-""" Configure vim-airline
+""" Configure Ale
+" Only run linting on enter or save
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 1
+
+" Show linter information in error message
+let g:ale_echo_msg_format = "%s [%linter%: %code%]"
+
+" Run fixers on save
+let g:ale_fix_on_save = 1
+
+" Disable whitespace-related warnings
+let g:ale_warn_about_trailing_blank_lines = 0
+let g:ale_warn_about_trailing_whitespace = 0
+
+""" Configure VimWiki
+let g:vimwiki_list = [{
+            \'path': '~/doc/notes/vimwiki/index.wiki',
+            \'syntax': 'markdown',
+            \'ext': '.md'}]
+
+""" Configure Polyglot
+let g:polyglot_disabled = ['python']  " Use Semshi for python
+
+""" Configure Airline
 let g:airline_powerline_fonts = 1 " Preload powerline fonts
 set laststatus=2 " Always show statusline
 let g:airline_theme='base16'
@@ -157,7 +215,7 @@ let g:airline_detect_paste=0
 " Only display git hunks if diff is nonzero
 let g:airline#extensions#hunks#non_zero_only = 1
 
-""" Configure vim-signature
+""" Configure Signature
 let g:SignatureMap = {
 \ 'Leader'             :  "m",
 \ 'PlaceNextMark'      :  "m,",
@@ -182,3 +240,9 @@ let g:SignatureMap = {
 \ 'ListBufferMarkers'  :  "m?"
 \ }
 let g:SignatureMarkTextHL = "SignColumn"
+
+""" Configure Illuminate
+let g:Illuminate_delay = 50 " Shorter delay before highlighting
+
+" Exclude certain files from being illuminated
+let g:Illuminate_ftblacklist = ['nerdtree']
