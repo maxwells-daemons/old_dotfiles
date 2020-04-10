@@ -1,3 +1,51 @@
+""" Main Neovim configuration.
+" This config aims to use Neovim as a text editor that appropriately scales in
+" complexity from a simple text editor to a full-fledged IDE while still
+" loading and editing fast.
+"
+" Mapping groups:
+"   - Unmodified: Motions and basic editing
+"       - n/N: Modifies a pair text object to select next/previous
+"       - s/S: Sneak forward/backward
+"   - g: Jumps
+"       - gd: Jump to definition
+"       - gD: Jump to declaration
+"       - gi: Jump to implementation
+"       - gt: Jump to type definition
+"       - gr: Jump to references (UI)
+"   - Ctrl: Advanced editing
+"       - hjkl: Navigate splits
+"       - c: Toggle comment
+"       - a: Code action (UI)
+"       - s: Refactor action (UI)
+"       - e: Rename a symbol
+"       - /: Multi-search the current word
+"       - f: Auto-format a block of text
+"   - Leader: UI actions
+"       - c/v: Open a horizontal/vertical split
+"       - q/l: Toggle the quickfix/loclist windows
+"       - n: Toggle the graphical directory viewer (NERDTree)
+"       - f/F: Fuzzy-search for files/Git files
+"       - b/B: Fuzzy-search for buffers/windows
+"       - t: Toggle the tag viewer (Vista)
+"       - g: Open the Git wrapper (Fugitive)
+"       - h: Toggle the undo history viewer (Mundo)
+"   - Brackets: paired movement
+"       - ]b and [b: Switch to next/previous buffer
+"       - ]e and [e: Jump to next/previous error or warning
+"       - ]E and [E: Jump to next/previous error
+"
+" Text objects:
+"   - e: Entire buffer
+"   - c: Comments
+"   - f: Functions
+"   - In Python:
+"       - d: docstrings
+"       - C: classes
+"   - n/N: Modifies a pair text object to select next/previous
+"   - Vim-surround enables modifying surrounding pairs
+
+
 """ Begin with tpope's vim-sensible (already run in neovim config)
 runtime! plugin/sensible.vim
 
@@ -36,17 +84,18 @@ call plug#begin(stdpath('data') . '/plugged')
     " Window and file management
     Plug 'drmingdrmer/vim-toggle-quickfix' " Toggle quickfix and loclist
     Plug 'qpkorr/vim-bufkill' " :BD to close a buffer without closing the split
-    Plug 'preservim/nerdtree' " Directory browser
+    Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'} " Directory browser
     Plug 'Xuyuanp/nerdtree-git-plugin' " Integrate git with NERDTree
     Plug 'junegunn/fzf' " Fuzzy-finder
     Plug 'junegunn/fzf.vim' " Integrates fzf with vim
 
     " Tools
     Plug 'tpope/vim-fugitive' " Git wrapper
-    Plug 'simnalamburt/vim-mundo' " Undo tree
+    Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'} " Undo history viewer
     Plug 'liuchengxu/vista.vim' " Tag viewer
-    Plug 'dense-analysis/ale' " Linting engine
     Plug 'vimwiki/vimwiki' " Personal wiki
+    " Completion, language client, and intellisense engine
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     " Aesthetics
     Plug 'sheerun/vim-polyglot' " Language pack
@@ -57,8 +106,6 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'Yggdroot/indentLine' " See indentation levels
     Plug 'RRethy/vim-illuminate' " Highlight the word under the cursor
 
-    " TODO: install and configure coc
-
     " Python
     " Semantic syntax highlighting
     Plug 'numirias/semshi', {'for': 'python', 'do': ':UpdateRemotePlugins'}
@@ -66,9 +113,10 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
     " Text objects for classes (C), functions (f), and docstrings (d)
     Plug 'jeetsukumaran/vim-pythonsense', {'for': 'python'}
-    " Work with virtualenvs
-    Plug 'jmcantrell/vim-virtualenv', {'for': 'python'}
-    Plug 'petobens/poet-v', {'for': 'python'}
+
+    " Completion sources
+    Plug 'Shougo/neco-vim'  " Vimscript
+    Plug 'neoclide/coc-neco' " Integrate neco with coc
 
     " Dependencies
     Plug 'tpope/vim-repeat' " Enables repeating certain plugins with .
@@ -76,26 +124,35 @@ call plug#begin(stdpath('data') . '/plugged')
 call plug#end()
 filetype plugin indent on " Enable filetype plugins and indent files
 
-""" Mappings (movement)
+""" Mappings (movement and editing)
 let g:targets_nl = 'nN' " Select next pair text object with n and last with N
+
+" Toggle commenting with <C-c>
+xmap <silent> <C-c> <Plug>Commentary
+omap <silent> <C-c> <Plug>Commentary
+" In normal mode, <C-c> toggles comments as an action
+nmap <silent> <C-c> <Plug>Commentary
+" <C-c><C-c> and <C-c>c toggle comments on this line
+nmap <silent> <C-c><C-c> <Plug>CommentaryLine
+nmap <silent> <C-c>c <Plug>CommentaryLine
 
 """ Mappings (UI)
 " ]b and [b move to next and previous buffers
-noremap ]b :bn<CR>
-noremap [b :bp<CR>
+noremap <silent> ]b :bn<CR>
+noremap <silent> [b :bp<CR>
 
-" <leader>c splits to the right
-noremap <leader>c :vsp<CR>
-" <leader>v splits below
-noremap <leader>v :sp<CR>
+" <leader>c splits horizontally
+noremap <silent> <leader>c :sp<CR>
+" <leader>v splits vertically
+noremap <silent> <leader>v :vsp<CR>
 
 " <leader>q toggles quickfix
-noremap <leader>q :call togglequickfix#ToggleQuickfix()<CR>
+noremap <silent> <leader>q :call togglequickfix#ToggleQuickfix()<CR>
 " <leader>l toggles loclist
-noremap <leader>l :call togglequickfix#ToggleLocation()<CR>
+noremap <silent> <leader>l :call togglequickfix#ToggleLocation()<CR>
 
 " <leader>n opens or closes NERDTree
-noremap <leader>n :NERDTreeToggle<CR>
+noremap <silent> <leader>n :NERDTreeToggle<CR>
 
 " fzf (fuzzy-finding)
 " <leader>f searches all files
@@ -104,15 +161,59 @@ nnoremap <leader>f :Files<CR>
 nnoremap <leader>F :GFiles<CR>
 " <leader>b searches all buffers
 nnoremap <leader>b :Buffers<CR>
+" <leader>B searches all windows
+nnoremap <leader>B :Windows<CR>
 
 " <leader>t toggles Vista (a tag browser)
-nnoremap <leader>t :Vista!!<CR>
+nnoremap <silent> <leader>t :Vista!!<CR>
 
 " <leader>g toggles Git
-nnoremap <leader>g :Git<CR>
+nnoremap <silent> <leader>g :Git<CR>
+
+" <leader>h toggle Mundo (undo history viewer)
+nnoremap <silent> <leader>h :MundoToggle<CR>
 
 " Disable bufkill mappings
 let g:BufKillCreateMappings = 0
+
+""" Mappings (advanced editing)
+" ]e and [e navigate next/previous errors and warnings
+nmap <silent> ]e <Plug>(coc-diagnostic-next)
+nmap <silent> [e <Plug>(coc-diagnostic-prev)
+
+" ]E and [E navigate next/previous errors only
+nmap <silent> ]E <Plug>(coc-diagnostic-next-error)
+nmap <silent> [E <Plug>(coc-diagnostic-prev-error)
+
+" <C-a> performs arbitrary code actions
+nmap <C-a> <Plug>(coc-codeaction)
+vmap <C-a> <Plug>(coc-codeaction-selected)
+
+" <C-s> performs arbitrary refactor actions (currently broken)
+nmap <C-s> <Plug>(coc-refactor)
+
+" <C-/> performs a multi-search on the current word
+nmap <silent> <C-_> :CocCommand document.renameCurrentWord<CR>
+
+" Jumps:
+"   - gd -> definition
+"   - gD -> declaration
+"   - gi -> implementation
+"   - gt -> type definition
+"   - gr -> references
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gD <Plug>(coc-declaration)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gt <Plug>(coc-type-definition)
+nmap <silent> gr <Plug>(coc-references)
+
+" <C-f> formats a block of text, and <C-f><C-f> formats the whole buffer
+nmap <silent> <C-f> <Plug>(coc-format-selected)
+vmap <silent> <C-f> <Plug>(coc-format-selected)
+nmap <silent> <C-f><C-f> <Plug>(coc-format)
+
+" <C-e> renames a symbol (currently broken)
+nmap <C-e> <Plug>(coc-rename)
 
 """ Configure suda
 let g:suda_smart_edit = 1  " Allow automatically opening files with sudo
@@ -122,6 +223,7 @@ autocmd BufEnter * EnableStripWhitespaceOnSave  " Strip whitespace on save
 autocmd BufEnter * DisableWhitespace " Disable whitespace highlighting
 let g:strip_whitespace_confirm = 0 " Do not ask before stripping whitespace
 let g:show_spaces_that_precede_tabs = 1 " Show spaces around tabs
+let g:strip_whitelines_at_eof = 1  " Strip end-of-file whitespace
 
 """ Configure sneak
 let g:sneak#label = 1  " Label mode assigns a label to each match
@@ -168,6 +270,7 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 
 """ Configure Signify
 let g:signify_vcs_list = ['git']
@@ -178,26 +281,45 @@ let g:signify_sign_change = '~'
 let g:vista#renderer#enable_icon = 0
 let g:vista_sidebar_width = 60
 
-""" Configure Ale
-" Only run linting on enter or save
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 1
-
-" Show linter information in error message
-let g:ale_echo_msg_format = "%s [%linter%: %code%]"
-
-" Run fixers on save
-let g:ale_fix_on_save = 1
-
-" Disable whitespace-related warnings
-let g:ale_warn_about_trailing_blank_lines = 0
-let g:ale_warn_about_trailing_whitespace = 0
-
 """ Configure VimWiki
 let g:vimwiki_list = [{
             \'path': '~/doc/notes/vimwiki/index.wiki',
             \'syntax': 'markdown',
             \'ext': '.md'}]
+
+""" Configure Coc
+" Completion:
+" Tab tries to do the following things, in order:
+"   - Select the first completion suggestion
+"   - Jump to the next snippet block
+"   - Act as a regular tab
+" Shift-tab does the first two, navigating backwards.
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
+inoremap <silent><expr> <S-Tab>
+      \ pumvisible() ? "\<C-p>" :
+      \ <SID>check_back_space() ? "\<S-Tab>" :
+      \ coc#refresh()
+
+let g:coc_snippet_next = '<Tab>'
+let g:coc_snippet_prev = '<S-Tab>'
+
+" <CR> confirms the selected completion
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<CR>"
+
+" Coc colors
+highlight CocErrorSign      guifg=#ff661a
+highlight CocWarningSign    guifg=#ffdc2d
+highlight CocInfoSign       guifg=#f2e6a9
+highlight CocHintSign       guifg=#40bfff
 
 """ Configure Polyglot
 let g:polyglot_disabled = ['python']  " Use Semshi for python

@@ -26,7 +26,6 @@ ln -sf $BASE_DIR/fonts/*.ttf $HOME/.fonts
 fc-cache
 
 echo "Installing Liquid Prompt"
-mkdir -p $XDG_CONFIG_HOME/liquidprompt
 mkdir -p $XDG_CONFIG_HOME/liquidprompt_theme
 ln -sf $SUBMODULE_DIR/liquidprompt $XDG_CONFIG_HOME
 ln -sf $DOTFILES_DIR/liquidprompt/liquidpromptrc $XDG_CONFIG_HOME/liquidpromptrc
@@ -69,6 +68,7 @@ ln -sf $DOTFILES_DIR/shell/bashrc $HOME/.bashrc
 ln -sf $DOTFILES_DIR/X/xinitrc $HOME/.xinitrc
 ln -sf $DOTFILES_DIR/X/Xmodmap $HOME/.Xmodmap
 ln -sf $DOTFILES_DIR/X/Xresources $HOME/.Xresources
+ln -sf $DOTFILES_DIR/X/xbindkeysrc $HOME/.xbindkeysrc
 ln -sf $DOTFILES_DIR/git/gitattributes $HOME/.gitattributes
 ln -sf $DOTFILES_DIR/git/gitconfig $HOME/.gitconfig
 ln -sf $DOTFILES_DIR/git/gitignore_global $HOME/.gitignore_global

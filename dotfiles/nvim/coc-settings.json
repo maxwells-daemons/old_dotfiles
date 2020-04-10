@@ -1,0 +1,19 @@
+{
+    "coc.preferences.colorSupport": false,
+    "coc.preferences.formatOnSaveFiletypes": ["python"],
+    "diagnostic.format": "%message [%source:%code]",
+    "diagnostic.checkCurrentLine": true,
+    "diagnostic.errorSign": ">>",
+    "diagnostic.warningSign": ">>",
+    "diagnostic.infoSign": "--",
+    "diagnostic.hintSign": "--",
+    "python.formatting.provider": "black",
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": ["--max-line-length=88"],
+    "python.linting.mypyEnabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.venvFolders": [".virtualenvs", ".cache/pypoetry/virtualenvs"],
+    "python.venvPath": "~/.virtualenvs",
+    "snippets.priority": 100,
+    "snippets.userSnippetsDirectory": "~/.config/nvim/snippets"
+}
