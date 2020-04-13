@@ -1,3 +1,7 @@
+" Mappings
+" Visual-mode <CR> runs a selection in the interpreter
+vnoremap <CR> :CocCommand python.execSelectionInTerminal<CR>
+
 " Use an 88-character colorcolumn
 set colorcolumn=88
 

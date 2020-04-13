@@ -36,7 +36,7 @@
 "       - ]E and [E: Jump to next/previous error
 "
 " Text objects:
-"   - e: Entire buffer
+"   - E: Entire buffer
 "   - c: Comments
 "   - f: Functions
 "   - In Python:
@@ -60,6 +60,9 @@ set tags=./tags
 
 " Treat all tex files as latex
 let g:tex_flavor = "latex"
+
+" Escape exits insert mode in terminal
+tnoremap <Esc> <C-\><C-n>
 
 """ Aesthetics
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1  " Enable true-color support
