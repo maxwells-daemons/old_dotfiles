@@ -46,7 +46,7 @@
 "   - Vim-surround enables modifying surrounding pairs
 
 
-""" Begin with tpope's vim-sensible (already run in neovim config)
+" Begin with tpope's vim-sensible (already run in neovim config)
 runtime! plugin/sensible.vim
 
 " Add ~/.vim as a source path
@@ -57,6 +57,9 @@ source ~/.vimrc
 
 " Tags are stored locally
 set tags=./tags
+
+" Treat all tex files as latex
+let g:tex_flavor = "latex"
 
 """ Aesthetics
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1  " Enable true-color support
@@ -96,6 +99,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'vimwiki/vimwiki' " Personal wiki
     " Completion, language client, and intellisense engine
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'honza/vim-snippets' " Builtin snippets
 
     " Aesthetics
     Plug 'sheerun/vim-polyglot' " Language pack
@@ -113,6 +117,9 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
     " Text objects for classes (C), functions (f), and docstrings (d)
     Plug 'jeetsukumaran/vim-pythonsense', {'for': 'python'}
+
+    " Latex
+    Plug 'lervag/vimtex', {'for': 'tex'}
 
     " Completion sources
     Plug 'Shougo/neco-vim'  " Vimscript
@@ -229,6 +236,13 @@ let g:strip_whitelines_at_eof = 1  " Strip end-of-file whitespace
 let g:sneak#label = 1  " Label mode assigns a label to each match
 highlight Sneak guifg=red guibg=none ctermfg=red ctermbg=none
 
+""" Rebind textobj-entire to use capital E
+let g:textobj_entire_no_default_key_mappings = 1
+xmap aE <Plug>(textobj-entire-a)
+omap aE <Plug>(textobj-entire-a)
+xmap iE <Plug>(textobj-entire-i)
+omap iE <Plug>(textobj-entire-i)
+
 """ Configure NERDTree
 " If NERDTree is the only window open, close vim
 " Source: https://github.com/preservim/nerdtree
@@ -313,7 +327,7 @@ let g:coc_snippet_next = '<Tab>'
 let g:coc_snippet_prev = '<S-Tab>'
 
 " <CR> confirms the selected completion
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<CR>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Coc colors
 highlight CocErrorSign      guifg=#ff661a
@@ -321,8 +335,8 @@ highlight CocWarningSign    guifg=#ffdc2d
 highlight CocInfoSign       guifg=#f2e6a9
 highlight CocHintSign       guifg=#40bfff
 
-""" Configure Polyglot
-let g:polyglot_disabled = ['python']  " Use Semshi for python
+""" Remove from Polyglot any language we have a dedicated config for
+let g:polyglot_disabled = ['python', 'latex']
 
 """ Configure Airline
 let g:airline_powerline_fonts = 1 " Preload powerline fonts
