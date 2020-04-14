@@ -230,7 +230,7 @@ client.placeholder      $base00 $base00 $base05 $base00 $base00
 client.background       $base07
 
 # Borders
-gaps inner 7
+gaps inner 5
 gaps outer 0
 new_window pixel 1
 
