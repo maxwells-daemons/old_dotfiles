@@ -25,6 +25,7 @@
 "       - c/v: Open a horizontal/vertical split
 "       - q/l: Toggle the quickfix/loclist windows
 "       - n: Toggle the graphical directory viewer (NERDTree)
+"       - /: Fuzzy-search for a word in this directory
 "       - f/F: Fuzzy-search for files/Git files
 "       - b/B: Fuzzy-search for buffers/windows
 "       - t: Toggle the tag viewer (Vista)
@@ -44,6 +45,11 @@
 "       - C: classes
 "   - n/N: Modifies a pair text object to select next/previous
 "   - Vim-surround enables modifying surrounding pairs
+"
+" Useful ex-mode commands:
+"   - CocCommand: Access extra functionality of Coc
+"   - Dispatch: Run a shell command asynchronously
+"   - Rg: Ripgrep for a word through FZF
 
 
 " Begin with tpope's vim-sensible (already run in neovim config)
@@ -175,6 +181,8 @@ nnoremap <leader>F :GFiles<CR>
 nnoremap <leader>b :Buffers<CR>
 " <leader>B searches all windows
 nnoremap <leader>B :Windows<CR>
+" <leader>/ searches for words with ripgrep
+nnoremap <leader>/ :Rg<CR>
 
 " <leader>t toggles Vista (a tag browser)
 nnoremap <silent> <leader>t :Vista!!<CR>
@@ -227,6 +235,25 @@ nmap <silent> <C-f><C-f> <Plug>(coc-format)
 " <C-e> renames a symbol (currently broken)
 nmap <C-e> <Plug>(coc-rename)
 
+" K shows documentation in a preview window
+" From: https://github.com/neoclide/coc.nvim
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Introduce function text object
+" From: https://github.com/neoclide/coc.nvim
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
 """ Configure suda
 let g:suda_smart_edit = 1 " Allow automatically opening files with sudo
 
@@ -277,6 +304,9 @@ let g:NERDTreeIndicatorMapCustom = {
 """ Configure FZF
 " Escape cancels FZF
 autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
+
+" Use a floating window
+let g:fzf_layout = {'window': {'width': 0.9, 'height': 0.7}}
 
 " Set up colors
 let g:fzf_colors =

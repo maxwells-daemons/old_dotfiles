@@ -23,6 +23,8 @@ export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/pkgconfig:/usr/share/pkgconfig:
 export CUDAROOT=/opt/cuda-10.1
 export CUDA_HOME=$CUDAROOT
 export CUDA_PATH=$CUDAROOT
+export C_INCLUDE_PATH=$C_INCLUDE_PATH:$CUDAROOT/include/
+export CPLUS_INCLUDE_PATH=$C_INCLUDE_PATH:$CUDAROOT/include/
 export TENSORRTROOT=/opt/TensorRT-6.0.1.5
 
 export PATH=$CUDAROOT/bin:$PATH
