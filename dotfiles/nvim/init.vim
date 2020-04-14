@@ -132,6 +132,7 @@ call plug#begin(stdpath('data') . '/plugged')
     " Dependencies
     Plug 'tpope/vim-repeat' " Enables repeating certain plugins with .
     Plug 'kana/vim-textobj-user' " Support for custom text objects
+    Plug 'tpope/vim-dispatch' " Async dispatch commands
 call plug#end()
 filetype plugin indent on " Enable filetype plugins and indent files
 
