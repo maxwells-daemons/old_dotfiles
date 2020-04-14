@@ -272,7 +272,11 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
-""" Set up FZF colors
+""" Configure FZF
+" Escape cancels FZF
+autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
+
+" Set up colors
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
