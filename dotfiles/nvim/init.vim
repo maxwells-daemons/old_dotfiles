@@ -65,12 +65,13 @@ let g:tex_flavor = "latex"
 tnoremap <Esc> <C-\><C-n>
 
 """ Aesthetics
-let $NVIM_TUI_ENABLE_TRUE_COLOR = 1  " Enable true-color support
+let $NVIM_TUI_ENABLE_TRUE_COLOR = 1 " Enable true-color support
 set showmode! " Do not show current mode (overwrites vimrc default)
-set signcolumn=yes  " Keep sign column open
+set signcolumn=yes " Keep sign column open
+set shortmess+=c " Squash completion-menu echoes
 
 """ Plugins
-filetype off  " Temporarily disable filetype plugins
+filetype off " Temporarily disable filetype plugins
 call plug#begin(stdpath('data') . '/plugged')
     " Editing
     Plug 'tpope/vim-sensible' " Sensible starting defaults
@@ -125,7 +126,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'lervag/vimtex', {'for': 'tex'}
 
     " Completion sources
-    Plug 'Shougo/neco-vim'  " Vimscript
+    Plug 'Shougo/neco-vim' " Vimscript
     Plug 'neoclide/coc-neco' " Integrate neco with coc
 
     " Dependencies
@@ -226,17 +227,17 @@ nmap <silent> <C-f><C-f> <Plug>(coc-format)
 nmap <C-e> <Plug>(coc-rename)
 
 """ Configure suda
-let g:suda_smart_edit = 1  " Allow automatically opening files with sudo
+let g:suda_smart_edit = 1 " Allow automatically opening files with sudo
 
 """ Configure better-whitespace
-autocmd BufEnter * EnableStripWhitespaceOnSave  " Strip whitespace on save
+autocmd BufEnter * EnableStripWhitespaceOnSave " Strip whitespace on save
 autocmd BufEnter * DisableWhitespace " Disable whitespace highlighting
 let g:strip_whitespace_confirm = 0 " Do not ask before stripping whitespace
 let g:show_spaces_that_precede_tabs = 1 " Show spaces around tabs
-let g:strip_whitelines_at_eof = 1  " Strip end-of-file whitespace
+let g:strip_whitelines_at_eof = 1 " Strip end-of-file whitespace
 
 """ Configure sneak
-let g:sneak#label = 1  " Label mode assigns a label to each match
+let g:sneak#label = 1 " Label mode assigns a label to each match
 highlight Sneak guifg=red guibg=none ctermfg=red ctermbg=none
 
 """ Rebind textobj-entire to use capital E
