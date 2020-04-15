@@ -66,6 +66,9 @@ nnoremap ` @a
 vnoremap . :normal .<CR>
 vnoremap ` :normal @a<CR>
 
+" Make Y work like C and D
+nmap Y y$
+
 " In vim, :W sudo saves the file
 " (useful for handling the permission-denied error)
 if !has('nvim')

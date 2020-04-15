@@ -7,6 +7,12 @@
     "diagnostic.warningSign": ">>",
     "diagnostic.infoSign": "--",
     "diagnostic.hintSign": "--",
+    "snippets.priority": 100,
+    "snippets.userSnippetsDirectory": "~/.config/nvim/snippets",
+    "cSpell.enabledLanguageIds": ["markdown", "pandoc", "plaintext"],
+    "markdownlint.onChange": false,
+    "markdownlint.config": {
+    },
     "python.formatting.provider": "black",
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Args": ["--max-line-length=88"],
@@ -14,6 +20,7 @@
     "python.linting.pylintEnabled": false,
     "python.venvFolders": [".virtualenvs", ".cache/pypoetry/virtualenvs"],
     "python.venvPath": "~/.virtualenvs",
-    "snippets.priority": 100,
-    "snippets.userSnippetsDirectory": "~/.config/nvim/snippets"
+    "cSpell.userWords": [
+      "Pandoc"
+    ]
 }

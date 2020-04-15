@@ -79,7 +79,7 @@ set shortmess+=c " Squash completion-menu echoes
 """ Plugins
 filetype off " Temporarily disable filetype plugins
 call plug#begin(stdpath('data') . '/plugged')
-    " Editing
+    """ Editing
     Plug 'tpope/vim-sensible' " Sensible starting defaults
     Plug 'lambdalisue/suda.vim' " Read and write files with sudo
     Plug 'ntpeters/vim-better-whitespace' " Whitespace stripping on save
@@ -88,13 +88,13 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'tpope/vim-commentary' " gcc/gc to toggle comments
     Plug 'justinmk/vim-sneak' " Motion to jump to a location, bound to s
 
-    " Text objects
+    """ Text objects
     Plug 'wellle/targets.vim' " Seek to text objects for pairs and separators
     Plug 'michaeljsmith/vim-indent-object' " Text object i for indentation level
     Plug 'kana/vim-textobj-entire' " Text object e for the entire buffer
     Plug 'glts/vim-textobj-comment' " Text object c for comments
 
-    " Window and file management
+    """ Window and file management
     Plug 'drmingdrmer/vim-toggle-quickfix' " Toggle quickfix and loclist
     Plug 'qpkorr/vim-bufkill' " :BD to close a buffer without closing the split
     Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'} " Directory browser
@@ -102,16 +102,16 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'junegunn/fzf' " Fuzzy-finder
     Plug 'junegunn/fzf.vim' " Integrates fzf with vim
 
-    " Tools
+    """ Tools
     Plug 'tpope/vim-fugitive' " Git wrapper
     Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'} " Undo history viewer
     Plug 'liuchengxu/vista.vim' " Tag viewer
-    Plug 'vimwiki/vimwiki' " Personal wiki
     " Completion, language client, and intellisense engine
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'honza/vim-snippets' " Builtin snippets
+    Plug 'godlygeek/tabular' " Line up text with :Tabularize
 
-    " Aesthetics
+    """ Aesthetics
     Plug 'sheerun/vim-polyglot' " Language pack
     Plug 'vim-airline/vim-airline' " Status line
     Plug 'vim-airline/vim-airline-themes' " Themes for vim-airline
@@ -120,22 +120,28 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'Yggdroot/indentLine' " See indentation levels
     Plug 'RRethy/vim-illuminate' " Highlight the word under the cursor
 
-    " Python
+    """ Plaintext and Markdown
+    " Document converter
+    Plug 'vim-pandoc/vim-pandoc', {'for': ['markdown', 'pandoc', 'vim']}
+    " Highlighting for Pandoc markdown
+    Plug 'vim-pandoc/vim-pandoc-syntax', {'for': ['markdown', 'pandoc', 'vim']}
+
+    """ Python
     " Semantic syntax highlighting
     Plug 'numirias/semshi', {'for': 'python', 'do': ':UpdateRemotePlugins'}
     " Better indentation
-    Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
+    Plug 'Vimjas/vim-python-pep8-indent', {'for': ['python', 'vim']}
     " Text objects for classes (C), functions (f), and docstrings (d)
-    Plug 'jeetsukumaran/vim-pythonsense', {'for': 'python'}
+    Plug 'jeetsukumaran/vim-pythonsense', {'for': ['python', 'vim']}
 
-    " Latex
+    """ Latex
     Plug 'lervag/vimtex', {'for': 'tex'}
 
-    " Completion sources
+    """ Completion sources
     Plug 'Shougo/neco-vim' " Vimscript
     Plug 'neoclide/coc-neco' " Integrate neco with coc
 
-    " Dependencies
+    """ Dependencies
     Plug 'tpope/vim-repeat' " Enables repeating certain plugins with .
     Plug 'kana/vim-textobj-user' " Support for custom text objects
     Plug 'tpope/vim-dispatch' " Async dispatch commands
@@ -193,8 +199,9 @@ nnoremap <silent> <leader>g :Git<CR>
 " <leader>h toggle Mundo (undo history viewer)
 nnoremap <silent> <leader>h :MundoToggle<CR>
 
-" Disable bufkill mappings
+" Disable bufkill and Dispatch mappings
 let g:BufKillCreateMappings = 0
+let g:dispatch_no_maps = 1
 
 """ Mappings (advanced editing)
 " ]e and [e navigate next/previous errors and warnings
@@ -209,7 +216,7 @@ nmap <silent> [E <Plug>(coc-diagnostic-prev-error)
 nmap <C-a> <Plug>(coc-codeaction)
 vmap <C-a> <Plug>(coc-codeaction-selected)
 
-" <C-s> performs arbitrary refactor actions (currently broken)
+" <C-s> performs arbitrary refactor actions (TODO: fix for Python)
 nmap <C-s> <Plug>(coc-refactor)
 
 " <C-/> performs a multi-search on the current word
@@ -232,7 +239,7 @@ nmap <silent> <C-f> <Plug>(coc-format-selected)
 vmap <silent> <C-f> <Plug>(coc-format-selected)
 nmap <silent> <C-f><C-f> <Plug>(coc-format)
 
-" <C-e> renames a symbol (currently broken)
+" <C-e> renames a symbol (TODO: fix for Python)
 nmap <C-e> <Plug>(coc-rename)
 
 " K shows documentation in a preview window
@@ -333,12 +340,6 @@ let g:signify_sign_change = '~'
 """ Configure Vista
 let g:vista#renderer#enable_icon = 0
 let g:vista_sidebar_width = 60
-
-""" Configure VimWiki
-let g:vimwiki_list = [{
-            \'path': '~/doc/notes/vimwiki/index.wiki',
-            \'syntax': 'markdown',
-            \'ext': '.md'}]
 
 """ Configure Coc
 " Completion:
