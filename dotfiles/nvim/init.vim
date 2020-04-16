@@ -125,6 +125,11 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'vim-pandoc/vim-pandoc', {'for': ['markdown', 'pandoc', 'vim']}
     " Highlighting for Pandoc markdown
     Plug 'vim-pandoc/vim-pandoc-syntax', {'for': ['markdown', 'pandoc', 'vim']}
+    " Distraction-free mode
+    Plug 'junegunn/goyo.vim', {'for': ['markdown', 'pandoc', 'vim']}
+    " Paragraph highlighting
+    Plug 'junegunn/limelight.vim', {'for': ['markdown', 'pandoc', 'vim']}
+
 
     """ Python
     " Semantic syntax highlighting

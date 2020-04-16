@@ -21,6 +21,8 @@
     "python.venvFolders": [".virtualenvs", ".cache/pypoetry/virtualenvs"],
     "python.venvPath": "~/.virtualenvs",
     "cSpell.userWords": [
-      "Pandoc"
+      "Aidan",
+      "Pandoc",
+      "Swope"
     ]
 }

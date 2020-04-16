@@ -33,10 +33,33 @@ let g:pandoc#folding#fastfolds=1 " More efficient folding algorithm
 let g:pandoc#folding#level=20 " Open folds by default"
 let g:pandoc#folding#fdc=0 " Disable foldcolumn
 let g:pandoc#compiler#arguments = "--standalone --mathjax"
+let g:pandoc#formatting#mode = "ha" " Enable hard wrapping and autoformatting
+let g:pandoc#formatting#textwidth = 120 " Wrap at 120 characters
 
 " Disable unused modules (use Coc's spellchecking and completion)
 let g:pandoc#spell#enabled=0
 let g:pandoc#modules#disabled = ["completion", "spell"]
+
+""" Goyo (distraction-free mode) settings
+" See: https://github.com/junegunn/goyo.vim/wiki/Customization
+
+" Toggle some settings along with Goyo
+function! s:goyo_enter()
+    Limelight " Enable paragraph highlighting
+    CocDisable " Disable error-checking, highlighting, and completion
+endfunction
+function! s:goyo_leave()
+    Limelight! " Disable paragraph highlighting
+    CocEnable " Enable error-checking, highlighting, and completion
+endfunction
+
+let g:goyo_width = 125 " Goyo mode use 125 characters of width
+
+" Set brightness of Limelight
+let g:limelight_default_coefficient = 0.5
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 """ Aesthetics
 let g:indentLine_enabled=0 " Disable indentLine conceal functionality
