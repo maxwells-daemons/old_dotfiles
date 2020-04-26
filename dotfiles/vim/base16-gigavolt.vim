@@ -15,8 +15,9 @@ if !has("gui_running")
 endif
 
 " GUI color definitions
-let s:gui00        = "202126"
-let g:base16_gui00 = "202126"
+" NOTE: BG colors are off typical background colors to be opaque
+let s:gui00        = "202125"
+let g:base16_gui00 = "202125"
 let s:gui01        = "2d303d"
 let g:base16_gui01 = "2d303d"
 let s:gui02        = "5a576e"
