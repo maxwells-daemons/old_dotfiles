@@ -1,2 +1,4 @@
 BasedOnStyle: Google
 IndentWidth: 4
+DerivePointerAlignment: True
+PointerAlignment: Left
