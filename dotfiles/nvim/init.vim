@@ -247,9 +247,9 @@ nmap <silent> <C-f><C-f> <Plug>(coc-format)
 " <C-e> renames a symbol (TODO: fix for Python)
 nmap <C-e> <Plug>(coc-rename)
 
-" K shows documentation in a preview window
+" <C-k> shows documentation in a preview window
 " From: https://github.com/neoclide/coc.nvim
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> <C-k> :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
