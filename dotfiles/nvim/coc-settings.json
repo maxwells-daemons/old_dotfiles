@@ -1,6 +1,6 @@
 {
     "coc.preferences.colorSupport": false,
-    "coc.preferences.formatOnSaveFiletypes": ["python"],
+    "coc.preferences.formatOnSaveFiletypes": ["python", "rust"],
     "diagnostic.format": "%message [%source:%code]",
     "diagnostic.checkCurrentLine": true,
     "diagnostic.errorSign": ">>",

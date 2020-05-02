@@ -60,6 +60,10 @@ pybase16.py inject -s $COLORSCHEME -f $DOTFILES_DIR/dunstrc
 mkdir -p $XDG_CONFIG_HOME/dunst
 ln -sf $DOTFILES_DIR/dunstrc $XDG_CONFIG_HOME/dunst/dunstrc
 
+echo "Configuring rust"
+mkdir -p $XDG_CONFIG_HOME/rustfmt
+ln -sf $DOTFILES_DIR/rustfmt.toml $XDG_CONFIG_HOME/rustfmt/rustfmt.toml
+
 echo "Configuring shell tools"
 pybase16.py inject -s $COLORSCHEME -f $DOTFILES_DIR/X/Xresources
 ln -sf $DOTFILES_DIR/shell/profile $HOME/.profile
