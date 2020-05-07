@@ -112,7 +112,6 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'godlygeek/tabular' " Line up text with :Tabularize
 
     """ Aesthetics
-    Plug 'sheerun/vim-polyglot' " Language pack
     Plug 'vim-airline/vim-airline' " Status line
     Plug 'vim-airline/vim-airline-themes' " Themes for vim-airline
     Plug 'mhinz/vim-signify' " See git changes in gutter and statusline
@@ -294,7 +293,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") &&
             \ b:NERDTree.isTabTree()) | q | endif
 
 let NERDTreeAutoDeleteBuffer = 1 " When we delete a file, also close its buffer
-let NERDTreeMinimalUI = 1 " Disable bookmark and help hints
 
 " Ignore some files
 let NERDTreeIgnore = ['\.pyc$', '__pycache__$[[dir]]']
@@ -379,9 +377,6 @@ highlight CocErrorSign      guifg=#ff661a
 highlight CocWarningSign    guifg=#ffdc2d
 highlight CocInfoSign       guifg=#f2e6a9
 highlight CocHintSign       guifg=#40bfff
-
-""" Remove from Polyglot any language we have a dedicated config for
-let g:polyglot_disabled = ['python', 'latex']
 
 """ Configure Airline
 let g:airline_powerline_fonts = 1 " Preload powerline fonts
