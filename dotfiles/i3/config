@@ -198,7 +198,7 @@ font xft:Hack 10.5
 
 # %%base16_template: i3##colors %%
 ## Base16 Gigavolt
-# Author: Aidan Swope (http://github.com/Whillikers)
+# Author: Aidan Swope (http://github.com/maxwells-daemons)
 #
 # You can use these variables anywhere in the i3 configuration file.
 

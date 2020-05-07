@@ -3,7 +3,7 @@ Xft.dpi: 170
 
 ! %%base16_template: xresources##default-256 %%
 ! Base16 Gigavolt
-! Scheme: Aidan Swope (http://github.com/Whillikers)
+! Scheme: Aidan Swope (http://github.com/maxwells-daemons)
 
 #define base00 #202126
 #define base01 #2d303d

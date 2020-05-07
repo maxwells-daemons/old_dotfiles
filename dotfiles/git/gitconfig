@@ -1,5 +1,5 @@
 [user]
-	name = Whillikers
+	name = maxwells-daemons
 	email = aidanswope@gmail.com
 [core]
 	excludesfile = ~/.gitignore_global

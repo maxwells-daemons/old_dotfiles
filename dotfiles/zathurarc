@@ -2,7 +2,7 @@ set selection-clipboard clipboard
 
 # %%base16_template: zathura %%
 # Base16 Gigavolt
-# Author: Aidan Swope (http://github.com/Whillikers)
+# Author: Aidan Swope (https://github.com/maxwells-daemons)
 
 set default-bg                  "#202126"
 set default-fg                  "#2d303d"
