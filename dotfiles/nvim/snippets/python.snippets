@@ -26,6 +26,34 @@
 
 snippet docstring "empty docstring" b
 """
-${1}
+${1:summary}
 """
+endsnippet
+
+snippet Parameters "docstring parameters section" b
+Parameters
+----------
+${1:name} : ${2:type}
+	${3:description}
+endsnippet
+
+snippet Returns "docstring return section" b
+Returns
+-------
+${1:type}
+	${2:description}
+endsnippet
+
+snippet Yields "docstring yield section" b
+Yields
+------
+${1:type}
+	${2:description}
+endsnippet
+
+snippet Attributes "docstring class attributes section" b
+Attributes
+----------
+${1:name} : ${2:type}
+	${3:description}
 endsnippet
