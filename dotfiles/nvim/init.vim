@@ -129,7 +129,6 @@ call plug#begin(stdpath('data') . '/plugged')
     " Paragraph highlighting
     Plug 'junegunn/limelight.vim', {'for': ['markdown', 'pandoc', 'vim']}
 
-
     """ Python
     " Semantic syntax highlighting
     Plug 'numirias/semshi', {'for': 'python', 'do': ':UpdateRemotePlugins'}
@@ -137,6 +136,9 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'Vimjas/vim-python-pep8-indent', {'for': ['python', 'vim']}
     " Text objects for classes (C), functions (f), and docstrings (d)
     Plug 'jeetsukumaran/vim-pythonsense', {'for': ['python', 'vim']}
+
+    """ C & C++
+    Plug 'rhysd/vim-clang-format', {'for': ['c', 'cpp', 'cuda']}
 
     """ Latex
     Plug 'lervag/vimtex', {'for': 'tex'}
