@@ -8,21 +8,18 @@
     "diagnostic.infoSign": "--",
     "diagnostic.hintSign": "--",
     "snippets.priority": 100,
+    "snippets.snipmate.enable": false,
     "snippets.userSnippetsDirectory": "~/.config/nvim/snippets",
     "cSpell.enabledLanguageIds": ["markdown", "pandoc", "plaintext"],
     "markdownlint.onChange": false,
-    "markdownlint.config": {
-    },
     "python.formatting.provider": "black",
     "python.linting.flake8Enabled": true,
-    "python.linting.flake8Args": ["--max-line-length=88"],
+    "python.linting.flake8Args": ["--max-line-length=88, --ignore=E203,W503"],
     "python.linting.mypyEnabled": true,
     "python.linting.pylintEnabled": false,
+    "python.sortImports.args": ["--line-width 88"],
+    "python.sortImports.path": "isort",
     "python.venvFolders": [".virtualenvs", ".cache/pypoetry/virtualenvs"],
     "python.venvPath": "~/.virtualenvs",
-    "cSpell.userWords": [
-      "Aidan",
-      "Pandoc",
-      "Swope"
-    ]
+    "cSpell.userWords": ["Aidan", "Swope"]
 }

@@ -12,12 +12,12 @@ vmap <buffer> <C-i> <Plug>(pandoc-keyboard-toggle-emphasis)
 " Toggle bold with <C-b>
 nmap <buffer> <C-b> <Plug>(pandoc-keyboard-toggle-strong)
 vmap <buffer> <C-b> <Plug>(pandoc-keyboard-toggle-strong)
-" Toggle verbatim with <C-v>
-nmap <buffer> <C-v> <Plug>(pandoc-keyboard-toggle-verbatim)
-vmap <buffer> <C-v> <Plug>(pandoc-keyboard-toggle-verbatim)
-" Toggle superscript with <C-u>
-nmap <buffer> <C-u> <Plug>(pandoc-keyboard-toggle-superscript)
-vmap <buffer> <C-u> <Plug>(pandoc-keyboard-toggle-superscript)
+" Toggle verbatim with <C-`>
+nmap <buffer> <C-`> <Plug>(pandoc-keyboard-toggle-verbatim)
+vmap <buffer> <C-`> <Plug>(pandoc-keyboard-toggle-verbatim)
+" Toggle superscript with <C-x>
+nmap <buffer> <C-x> <Plug>(pandoc-keyboard-toggle-superscript)
+vmap <buffer> <C-x> <Plug>(pandoc-keyboard-toggle-superscript)
 " Toggle subscript with <C-d>
 nmap <buffer> <C-d> <Plug>(pandoc-keyboard-toggle-subscript)
 vmap <buffer> <C-d> <Plug>(pandoc-keyboard-toggle-subscript)
