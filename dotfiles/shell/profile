@@ -51,3 +51,6 @@ eval "$(pyenv init -)"
 
 # Rust config
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# Ruby config
+export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
