@@ -62,8 +62,7 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 """ Aesthetics
 let g:indentLine_enabled=0 " Disable indentLine conceal functionality
 let g:indentLine_setColors=0 " Disable indentLine colors
-setlocal conceallevel=2 " Enable conceal
-setlocal concealcursor-=n " Disable conceal on the current line
+setlocal conceallevel=0 " Disable conceal
 setlocal colorcolumn=  " Disable color column
 
 " Fix conceal color
