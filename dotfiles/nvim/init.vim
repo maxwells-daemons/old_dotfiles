@@ -14,10 +14,12 @@
 "       - gt: Jump to type definition
 "       - gr: Jump to references (UI)
 "   - Ctrl: Advanced editing
-"       - hjkl: Navigate splits
+"       - hjkl: Navigate splits (normal mode)
+"       - j/k: Jump to next/previous snippet section
 "       - c: Toggle comment
 "       - a: Code action (UI)
 "       - s: Refactor action (UI)
+"       - d: Open documentation
 "       - e: Rename a symbol
 "       - /: Multi-search the current word
 "       - f: Auto-format a block of text
@@ -248,9 +250,9 @@ nmap <silent> <C-f><C-f> <Plug>(coc-format)
 " <C-e> renames a symbol (TODO: fix for Python)
 nmap <C-e> <Plug>(coc-rename)
 
-" <C-k> shows documentation in a preview window
+" <C-d> shows documentation in a preview window
 " From: https://github.com/neoclide/coc.nvim
-nnoremap <silent> <C-k> :call <SID>show_documentation()<CR>
+nnoremap <silent> <C-d> :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -347,12 +349,8 @@ let g:vista#renderer#enable_icon = 0
 let g:vista_sidebar_width = 60
 
 """ Configure Coc
-" Completion:
-" Tab tries to do the following things, in order:
-"   - Select the first completion suggestion
-"   - Jump to the next snippet block
-"   - Act as a regular tab
-" Shift-tab does the first two, navigating backwards.
+" Tab (S-Tab) tries to select the next (previous) completion item if possible,
+" and otherwise inserts a regular tab.
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -360,16 +358,14 @@ endfunction
 
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
+      \ "\<Tab>"
 
 inoremap <silent><expr> <S-Tab>
       \ pumvisible() ? "\<C-p>" :
-      \ <SID>check_back_space() ? "\<S-Tab>" :
-      \ coc#refresh()
+      \ "\<S-Tab>"
 
-let g:coc_snippet_next = '<Tab>'
-let g:coc_snippet_prev = '<S-Tab>'
+let g:coc_snippet_next = '<C-j>'
+let g:coc_snippet_prev = '<C-k>'
 
 " <CR> confirms the selected completion
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
