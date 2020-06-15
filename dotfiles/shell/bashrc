@@ -6,7 +6,7 @@
 # Aliases
 alias ls='ls --color -I snap'  # Add colors to ls and hide snap
 alias v='nvim'
-alias rg='rg --ignore-file ~/.config/.ripgrep_ignore'
+alias rg='rg --ignore-file ~/.config/.ignore'
 alias xclip='xclip -selection c -r' # xclip copies as ctrl-C, without trailing newline
 alias mathematica="env LD_PRELOAD='/usr/lib/libfreetype.so /usr/lib/libz.so' vblank_mode=0 mathematica"
 
