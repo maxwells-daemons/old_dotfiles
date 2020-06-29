@@ -2,3 +2,4 @@
 .gitkeep
 LICENSE
 .mypy_cache/
+__pycache__
