@@ -189,7 +189,7 @@ exec --no-startup-id dockd --daemon
 exec --no-startup-id dropbox start
 
 # NOTE: change to new location when moving
-exec --no-startup-id "redshift-gtk -l 37:-122"
+exec --no-startup-id "redshift-gtk -l 38:-122 -b 1.0:0.85"
 
 
 ### Aesthetics ###
