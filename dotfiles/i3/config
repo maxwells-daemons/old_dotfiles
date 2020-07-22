@@ -184,7 +184,7 @@ exec_always --no-startup-id ~/bin/for_robots/launch_bar.sh
 exec --no-startup-id unclutter --jitter 20
 exec --no-startup-id nm-applet
 exec --no-startup-id dockd --daemon
-exec_always --no-startup-id ~/bin/scripts/,load-webcam-settings.py ~/dotfiles/dotfiles/webcam-settings.txt
+exec_always --no-startup-id ~/bin/scripts/,load-webcam-settings.py
 
 # Programs
 exec --no-startup-id dropbox start
