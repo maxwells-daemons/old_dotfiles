@@ -145,9 +145,9 @@ cython_debug/
 TAGS
 .TAGS
 !TAGS/
-tags
+# tags
 .tags
-!tags/
+# !tags/
 gtags.files
 GTAGS
 GRTAGS
@@ -178,7 +178,7 @@ Session.vim
 .netrwhist
 *~
 # Auto-generated tag files
-tags
+# tags
 # Persistent undo
 [._]*.un~
 
