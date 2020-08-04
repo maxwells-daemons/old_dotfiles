@@ -23,7 +23,7 @@
 "       - e: Rename a symbol
 "       - /: Multi-search the current word
 "       - f: Auto-format a block of text
-"       - =/+: Increment or decrement a number
+"       - =/+: Increment or decrement a number, swap True/False, +/-, ...
 "   - Leader: UI actions
 "       - c/v: Open a horizontal/vertical split
 "       - q/l: Toggle the quickfix/loclist windows
@@ -90,6 +90,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'tpope/vim-surround' " Edit surrounding pairs
     Plug 'tpope/vim-commentary' " gcc/gc to toggle comments
     Plug 'justinmk/vim-sneak' " Motion to jump to a location, bound to s
+    Plug 'Konfekt/vim-CtrlXA' " Allow 'incrementing/decrementing' many things
 
     """ Text objects
     Plug 'wellle/targets.vim' " Seek to text objects for pairs and separators
@@ -168,10 +169,10 @@ nmap <silent> <C-c> <Plug>Commentary
 " <C-c><C-c> and <C-c>c toggle comments on this line
 nmap <silent> <C-c><C-c> <Plug>CommentaryLine
 nmap <silent> <C-c>c <Plug>CommentaryLine
-" =/+ increment / decrement numbers
-nnoremap = <C-a>
-nnoremap + <C-x>
-nunmap <C-x>
+
+" =/+ increment / decrement numbers and other recognized objects
+nnoremap <silent><expr> = CtrlXA#SingleInc("\<C-A>")
+nnoremap <silent><expr> + CtrlXA#SingleInc("\<C-X>")
 
 """ Mappings (UI)
 " ]b and [b move to next and previous buffers
