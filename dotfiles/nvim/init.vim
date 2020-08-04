@@ -23,6 +23,7 @@
 "       - e: Rename a symbol
 "       - /: Multi-search the current word
 "       - f: Auto-format a block of text
+"       - =/+: Increment or decrement a number
 "   - Leader: UI actions
 "       - c/v: Open a horizontal/vertical split
 "       - q/l: Toggle the quickfix/loclist windows
@@ -167,6 +168,10 @@ nmap <silent> <C-c> <Plug>Commentary
 " <C-c><C-c> and <C-c>c toggle comments on this line
 nmap <silent> <C-c><C-c> <Plug>CommentaryLine
 nmap <silent> <C-c>c <Plug>CommentaryLine
+" =/+ increment / decrement numbers
+nnoremap = <C-a>
+nnoremap + <C-x>
+nunmap <C-x>
 
 """ Mappings (UI)
 " ]b and [b move to next and previous buffers
