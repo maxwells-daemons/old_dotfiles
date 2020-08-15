@@ -21,5 +21,9 @@
     "python.sortImports.path": "isort",
     "python.venvFolders": [".virtualenvs", ".cache/pypoetry/virtualenvs"],
     "python.venvPath": "~/.virtualenvs",
-    "cSpell.userWords": ["Aidan", "Swope"]
+    "cSpell.userWords": [
+      "Aidan",
+      "Swope",
+      "backpropagation"
+    ]
 }

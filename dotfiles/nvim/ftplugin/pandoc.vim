@@ -34,6 +34,9 @@ let g:pandoc#folding#level=20 " Open folds by default"
 let g:pandoc#folding#fdc=0 " Disable foldcolumn
 let g:pandoc#compiler#arguments = "--standalone --mathjax"
 
+" Hard wrap and autoformat as you type
+let g:pandoc#formatting#mode='ha'
+
 " Disable unused modules (use Coc's spellchecking and completion)
 let g:pandoc#spell#enabled=0
 let g:pandoc#modules#disabled = ["completion", "spell"]
@@ -64,6 +67,8 @@ let g:indentLine_enabled=0 " Disable indentLine conceal functionality
 let g:indentLine_setColors=0 " Disable indentLine colors
 setlocal conceallevel=0 " Disable conceal
 setlocal colorcolumn=  " Disable color column
+setlocal nonumber " Disable line numbers
+setlocal norelativenumber
 
 " Fix conceal color
 hi! link conceal comment
