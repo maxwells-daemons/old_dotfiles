@@ -13,6 +13,7 @@
 "       - gi: Jump to implementation
 "       - gt: Jump to type definition
 "       - gr: Jump to references (UI)
+"       - gp: Select last paste
 "   - Ctrl: Advanced editing
 "       - hjkl: Navigate splits (normal mode)
 "       - j/k: Jump to next/previous snippet section
