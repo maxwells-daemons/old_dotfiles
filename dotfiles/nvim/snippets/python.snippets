@@ -24,7 +24,12 @@
 #
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
 
-snippet Value "typed docstring value" b
+snippet Value "docstring value" b
+${1:name}
+	${3:description}
+endsnippet
+
+snippet TypedValue "typed docstring value" b
 ${1:name} : ${2:type}
 	${3:description}
 endsnippet
@@ -32,27 +37,23 @@ endsnippet
 snippet Parameters "docstring parameters section" b
 Parameters
 ----------
-${1:name} : ${2:type}
-	${3:description}
+${1}
 endsnippet
 
 snippet Returns "docstring return section" b
 Returns
 -------
-${1:type}
-	${2:description}
+${1}
 endsnippet
 
 snippet Yields "docstring yield section" b
 Yields
 ------
-${1:type}
-	${2:description}
+${1}
 endsnippet
 
-snippet Attributes "docstring class attributes section" b
+snippet TypedAttributes "docstring class attributes section" b
 Attributes
 ----------
-${1:name} : ${2:type}
-	${3:description}
+${1}
 endsnippet
