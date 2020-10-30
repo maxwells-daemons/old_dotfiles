@@ -25,6 +25,7 @@
 "       - /: Multi-search the current word
 "       - f: Auto-format a block of text
 "       - =/+: Increment or decrement a number, swap True/False, +/-, ...
+"       - Space: toggle a checkbox
 "   - Leader: UI actions
 "       - c/v: Open a horizontal/vertical split
 "       - q/l: Toggle the quickfix/loclist windows
@@ -32,9 +33,15 @@
 "       - /: Fuzzy-search for a word in this directory
 "       - f/F: Fuzzy-search for files/Git files
 "       - b/B: Fuzzy-search for buffers/windows
+"       - e: Diagnostics
 "       - t: Toggle the tag viewer (Vista)
 "       - g: Open the Git wrapper (Fugitive)
 "       - h: Toggle the undo history viewer (Mundo)
+"       - w: Wiki actions
+"           - ww: Open the default wiki index
+"           - ws: Select and open a wiki index
+"           - wd: Delete the current wiki file
+"           - wr: Rename the current wiki file
 "   - Brackets: paired movement
 "       - ]b and [b: Switch to next/previous buffer
 "       - ]e and [e: Jump to next/previous error or warning
@@ -62,8 +69,8 @@ runtime! plugin/sensible.vim
 " Add ~/.vim as a source path
 set runtimepath+=~/.vim,~/.vim/after,~/.vim/autoload
 
-" Core modifications are in ~/.vimrc
-source ~/.vimrc
+" Core modifications are in ~/.vim/vimrc
+source ~/.vim/vimrc
 
 " Tags are stored locally
 set tags=./tags
@@ -74,11 +81,20 @@ let g:tex_flavor = "latex"
 " Escape exits insert mode in terminal
 tnoremap <Esc> <C-\><C-n>
 
+" Remember folds on entering/leaving a buffer
+" See https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave * silent! mkview
+  autocmd BufWinEnter * silent! loadview
+augroup END
+
 """ Aesthetics
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1 " Enable true-color support
 set showmode! " Do not show current mode (overwrites vimrc default)
 set signcolumn=yes " Keep sign column open
 set shortmess+=c " Squash completion-menu echoes
+set concealcursor= " Disable all conceals on the cursor line
 
 """ Plugins
 filetype off " Temporarily disable filetype plugins
@@ -89,14 +105,14 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'ntpeters/vim-better-whitespace' " Whitespace stripping on save
     Plug 'Raimondi/delimitMate' " Autocomplete parentheses, etc
     Plug 'tpope/vim-surround' " Edit surrounding pairs
-    Plug 'tpope/vim-commentary' " gcc/gc to toggle comments
+    Plug 'tpope/vim-commentary' " ctrl-c to toggle comments
     Plug 'justinmk/vim-sneak' " Motion to jump to a location, bound to s
     Plug 'Konfekt/vim-CtrlXA' " Allow 'incrementing/decrementing' many things
 
     """ Text objects
     Plug 'wellle/targets.vim' " Seek to text objects for pairs and separators
     Plug 'michaeljsmith/vim-indent-object' " Text object i for indentation level
-    Plug 'kana/vim-textobj-entire' " Text object e for the entire buffer
+    Plug 'kana/vim-textobj-entire' " Text object E for the entire buffer
     Plug 'glts/vim-textobj-comment' " Text object c for comments
 
     """ Window and file management
@@ -115,32 +131,26 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'honza/vim-snippets' " Builtin snippets
     Plug 'godlygeek/tabular' " Line up text with :Tabularize
+    Plug 'vimwiki/vimwiki' " Markdown wiki links & todolists
 
     """ Aesthetics
     Plug 'vim-airline/vim-airline' " Status line
     Plug 'vim-airline/vim-airline-themes' " Themes for vim-airline
     Plug 'mhinz/vim-signify' " See git changes in gutter and statusline
     Plug 'kshenoy/vim-signature' " Display marks in gutter
-    Plug 'Yggdroot/indentLine' " See indentation levels
+    Plug 'nathanaelkane/vim-indent-guides' " Display indent levels
     Plug 'RRethy/vim-illuminate' " Highlight the word under the cursor
 
     """ Plaintext and Markdown
-    " Document converter
-    Plug 'vim-pandoc/vim-pandoc', {'for': ['markdown', 'pandoc', 'vim']}
-    " Highlighting for Pandoc markdown
-    Plug 'vim-pandoc/vim-pandoc-syntax', {'for': ['markdown', 'pandoc', 'vim']}
-    " Distraction-free mode
-    Plug 'junegunn/goyo.vim', {'for': ['markdown', 'pandoc', 'vim']}
-    " Paragraph highlighting
-    Plug 'junegunn/limelight.vim', {'for': ['markdown', 'pandoc', 'vim']}
+    Plug 'vim-pandoc/vim-pandoc', {'for': ['markdown', 'pandoc', 'vim', 'vimwiki']} " Document converter
+    Plug 'vim-pandoc/vim-pandoc-syntax', {'for': ['markdown', 'pandoc', 'vim', 'vimwiki']} " Highlighting for Pandoc markdown
+    Plug 'junegunn/goyo.vim', {'for': ['markdown', 'pandoc', 'vim', 'vimwiki']} " Distraction-free mode
+    Plug 'junegunn/limelight.vim', {'for': ['markdown', 'pandoc', 'vim', 'vimwiki']} " Paragraph highlighting
 
     """ Python
-    " Semantic syntax highlighting
-    Plug 'numirias/semshi', {'for': 'python', 'do': ':UpdateRemotePlugins'}
-    " Better indentation
-    Plug 'Vimjas/vim-python-pep8-indent', {'for': ['python', 'vim']}
-    " Text objects for classes (C), functions (f), and docstrings (d)
-    Plug 'jeetsukumaran/vim-pythonsense', {'for': ['python', 'vim']}
+    Plug 'numirias/semshi', {'for': 'python', 'do': ':UpdateRemotePlugins'} " Semantic syntax highlighting
+    Plug 'Vimjas/vim-python-pep8-indent', {'for': ['python', 'vim']} " Better indentation
+    Plug 'jeetsukumaran/vim-pythonsense', {'for': ['python', 'vim']} " Text objects for classes (C), functions (f), and docstrings (d)
 
     """ C & C++
     Plug 'rhysd/vim-clang-format', {'for': ['c', 'cpp', 'cuda']}
@@ -190,6 +200,9 @@ noremap <silent> <leader>q :call togglequickfix#ToggleQuickfix()<CR>
 " <leader>l toggles loclist
 noremap <silent> <leader>l :call togglequickfix#ToggleLocation()<CR>
 
+" <leader>e opens a list of all diagnostics
+nmap <silent> <leader>e :CocDiagnostics<CR>
+
 " <leader>n opens or closes NERDTree
 noremap <silent> <leader>n :NERDTreeToggle<CR>
 
@@ -231,7 +244,7 @@ nmap <silent> [E <Plug>(coc-diagnostic-prev-error)
 nmap <C-a> <Plug>(coc-codeaction)
 vmap <C-a> <Plug>(coc-codeaction-selected)
 
-" <C-s> performs arbitrary refactor actions (TODO: fix for Python)
+" <C-s> performs arbitrary refactor actions
 nmap <C-s> <Plug>(coc-refactor)
 
 " <C-/> performs a multi-search on the current word
@@ -254,7 +267,7 @@ nmap <silent> <C-f> <Plug>(coc-format-selected)
 vmap <silent> <C-f> <Plug>(coc-format-selected)
 nmap <silent> <C-f><C-f> <Plug>(coc-format)
 
-" <C-e> renames a symbol (TODO: fix for Python)
+" <C-e> renames a symbol
 nmap <C-e> <Plug>(coc-rename)
 
 " <C-d> shows documentation in a preview window
@@ -309,7 +322,7 @@ let NERDTreeAutoDeleteBuffer = 1 " When we delete a file, also close its buffer
 let NERDTreeIgnore = ['\.pyc$', '__pycache__$[[dir]]']
 
 " Set up Git symbols
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "!",
     \ "Staged"    : "+",
     \ "Untracked" : "*",
@@ -390,7 +403,8 @@ let g:airline_theme='base16'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#wordcount#filetypes = ['txt', 'md']
-let g:airline#extensions#wordcount#filetypes  = '\vnotes|help|markdown|rst|org|text|asciidoc|tex|mail|vimwiki|pandoc'
+let g:airline#extensions#wordcount#filetypes =
+    \   '\vnotes|help|markdown|rst|org|text|asciidoc|tex|mail|vimwiki|pandoc'
 let g:airline_detect_paste=0
 
 " Only display git hunks if diff is nonzero
@@ -427,3 +441,33 @@ let g:Illuminate_delay = 50 " Shorter delay before highlighting
 
 " Exclude certain files from being illuminated
 let g:Illuminate_ftblacklist = ['nerdtree']
+
+
+""" Configure indent-guides
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'vimwiki', 'fzf']
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#2d303d
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  guibg=#2d303d
+
+""" Configure vimwiki
+" Use a markdown wiki that automatically updates tags and links
+let g:vimwiki_list = [{'path': '~/media/documents/vimwiki/',
+            \           'syntax': 'markdown',
+            \           'ext': '.md',
+            \           'auto_tags': 1,
+            \           'auto_generate_tags': 1,
+            \           'auto_generate_links': 1,
+            \           'links_space_char': '-'}]
+let g:vimwiki_filetypes = ['markdown', 'pandoc'] " Pandoc compatibility
+let g:vimwiki_auto_chdir = 1 " Automatically change root to the wiki dir
+
+" Configure styles for auto-generated headers
+let g:vimwiki_markdown_header_style = 0
+let g:vimwiki_tags_header = 'All Tags'
+let g:vimwiki_tags_header_level = 2
+let g:vimwiki_links_header = 'All Links'
+let g:vimwiki_links_header_level = 2
+let g:vimwiki_key_mappings = {'table_mappings': 0} " Keep tab mapping

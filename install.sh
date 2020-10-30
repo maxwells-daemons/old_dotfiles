@@ -1,84 +1,66 @@
 #!/bin/sh
 
 # Config
-COLORSCHEME=${1:-gigavolt}
-
+[ -z ${XDG_CONFIG_HOME} ] && export XDG_CONFIG_HOME=${HOME}/.config
 BASE_DIR=$(dirname $(realpath $0))
 DOTFILES_DIR=$BASE_DIR/dotfiles
-SCRIPT_DIR=$BASE_DIR/bin
-SUBMODULE_DIR=$BASE_DIR/submodules
 
-echo "Setting up"
-mkdir -p $XDG_CONFIG_HOME
-cd $SUBMODULE_DIR/base16-builder-python
+echo "Setting up config home: ${XDG_CONFIG_HOME}"
+mkdir -pv $XDG_CONFIG_HOME
+echo
 
-echo "Building base16 templates and colorschemes"
-pybase16.py update
-pybase16.py build -o "$BASE_DIR/base16_output" -s $COLORSCHEME \
-    -t dunst -t i3 -t kitty -t rofi -t shell -t vim -t xresources
+echo "Setting up XDG user directories"
+ln -sfv ${DOTFILES_DIR}/user-dirs.dirs ${XDG_CONFIG_HOME}/user-dirs.dirs
+echo
 
-echo "Installing base16-shell"
-ln -sf $SUBMODULE_DIR/base16-shell $XDG_CONFIG_HOME
+echo "Linking shell configuration"
+ln -sfnv ${DOTFILES_DIR}/shells ${XDG_CONFIG_HOME}/shells
+echo
 
-echo "Installing fonts"
-mkdir -p $HOME/.fonts
-ln -sf $BASE_DIR/fonts/*.ttf $HOME/.fonts
-fc-cache
+echo "Configuring bash"
+ln -sfv ${DOTFILES_DIR}/shells/bash/bash_profile ${HOME}/.bash_profile
+ln -sfv ${DOTFILES_DIR}/shells/bash/bashrc ${HOME}/.bashrc
+echo
 
-echo "Installing Liquid Prompt"
-mkdir -p $XDG_CONFIG_HOME/liquidprompt_theme
-ln -sf $SUBMODULE_DIR/liquidprompt $XDG_CONFIG_HOME
-ln -sf $DOTFILES_DIR/liquidprompt/liquidpromptrc $XDG_CONFIG_HOME/liquidpromptrc
-ln -sf $DOTFILES_DIR/liquidprompt/custom.ps1 $XDG_CONFIG_HOME/liquidprompt_theme/custom.ps1
-ln -sf $DOTFILES_DIR/liquidprompt/custom.theme $XDG_CONFIG_HOME/liquidprompt_theme/custom.theme
+echo "Configuring vim"
+mkdir -pv ${XDG_DATA_HOME}/vim/undo
+mkdir -pv ${XDG_DATA_HOME}/vim/swap
+mkdir -pv ${XDG_DATA_HOME}/vim/backup
+mkdir -pv ${HOME}/.vim/colors
+ln -sfv ${DOTFILES_DIR}/vim/base16-gigavolt.vim $HOME/.vim/colors/base16-gigavolt.vim
+ln -sfv ${DOTFILES_DIR}/vim/vimrc $HOME/.vim/vimrc
 
-echo "Installing EGPU service"
-sudo ln -sf $DOTFILES_DIR/setup-egpu.service /etc/systemd/system/setup-egpu.service
+if [ -z ${HOME}/.vim/autoload/plug.vim ]; then
+    curl -fLo ${HOME}/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+echo
 
-echo "Configuring Kitty"
-pybase16.py inject -s $COLORSCHEME -f $DOTFILES_DIR/kitty.conf
-ln -sf $DOTFILES_DIR/kitty.conf $XDG_CONFIG_HOME/kitty/kitty.conf
+echo "Configuring neovim"
+ln -sfnv ${DOTFILES_DIR}/nvim ${XDG_CONFIG_HOME}/nvim
+if [ -z ${XDG_DATA_HOME}/nvim/site/autoload/plug.vim ]; then
+    sh -c 'curl -fLo ${XDG_DATA_HOME}/nvim/site/autoload/plug.vim --create-dirs \
+           https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+fi
+echo
 
-echo "Configuring Vim and Neovim"
-mkdir -p $HOME/.vim/colors
-ln -sf $DOTFILES_DIR/vim/base16-gigavolt.vim $HOME/.vim/colors/base16-gigavolt.vim
-ln -sf $DOTFILES_DIR/vim/vimrc $HOME/.vimrc
-ln -sf $DOTFILES_DIR/nvim $XDG_CONFIG_HOME
+echo "Linking XDG config directories"
+ln -sfnv ${DOTFILES_DIR}/alsa       ${XDG_CONFIG_HOME}/alsa
+ln -sfnv ${DOTFILES_DIR}/dunst      ${XDG_CONFIG_HOME}/dunst
+ln -sfnv ${DOTFILES_DIR}/git        ${XDG_CONFIG_HOME}/git
+ln -sfnv ${DOTFILES_DIR}/htop       ${XDG_CONFIG_HOME}/htop
+ln -sfnv ${DOTFILES_DIR}/i3         ${XDG_CONFIG_HOME}/i3
+ln -sfnv ${DOTFILES_DIR}/kitty      ${XDG_CONFIG_HOME}/kitty
+ln -sfnv ${DOTFILES_DIR}/npm        ${XDG_CONFIG_HOME}/npm
+ln -sfnv ${DOTFILES_DIR}/picom      ${XDG_CONFIG_HOME}/picom
+ln -sfnv ${DOTFILES_DIR}/polybar    ${XDG_CONFIG_HOME}/polybar
+ln -sfnv ${DOTFILES_DIR}/rofi       ${XDG_CONFIG_HOME}/rofi
+ln -sfnv ${DOTFILES_DIR}/systemd    ${XDG_CONFIG_HOME}/systemd
+ln -sfnv ${DOTFILES_DIR}/X11        ${XDG_CONFIG_HOME}/X11
+ln -sfnv ${DOTFILES_DIR}/yay        ${XDG_CONFIG_HOME}/yay
+echo
 
-echo "Configuring i3"
-pybase16.py inject -s $COLORSCHEME -f $DOTFILES_DIR/i3/config
-ln -sf $DOTFILES_DIR/i3 $XDG_CONFIG_HOME/
-ln -sf $DOTFILES_DIR/rofi_scripts $XDG_CONFIG_HOME/
+echo "Linking other files"
+ln -sfv $BASE_DIR/other-files/webcam-settings.txt ${XDG_CONFIG_HOME}/webcam-settings.txt
 
-echo "Configuring zathura"
-pybase16.py inject -s $COLORSCHEME -f $DOTFILES_DIR/zathurarc
-mkdir -p $XDG_CONFIG_HOME/zathura
-ln -sf $DOTFILES_DIR/zathurarc $XDG_CONFIG_HOME/zathura/zathurarc
-
-echo "Configuring dunst"
-pybase16.py inject -s $COLORSCHEME -f $DOTFILES_DIR/dunstrc
-mkdir -p $XDG_CONFIG_HOME/dunst
-ln -sf $DOTFILES_DIR/dunstrc $XDG_CONFIG_HOME/dunst/dunstrc
-
-echo "Configuring rust"
-mkdir -p $XDG_CONFIG_HOME/rustfmt
-ln -sf $DOTFILES_DIR/rustfmt.toml $XDG_CONFIG_HOME/rustfmt/rustfmt.toml
-
-echo "Configuring shell tools"
-pybase16.py inject -s $COLORSCHEME -f $DOTFILES_DIR/X/Xresources
-ln -sf $DOTFILES_DIR/shell/profile $HOME/.profile
-ln -sf $DOTFILES_DIR/shell/bash_profile $HOME/.bash_profile
-ln -sf $DOTFILES_DIR/shell/bashrc $HOME/.bashrc
-ln -sf $DOTFILES_DIR/X/xinitrc $HOME/.xinitrc
-ln -sf $DOTFILES_DIR/X/Xmodmap $HOME/.Xmodmap
-ln -sf $DOTFILES_DIR/X/Xresources $HOME/.Xresources
-ln -sf $DOTFILES_DIR/X/xbindkeysrc $HOME/.xbindkeysrc
-ln -sf $DOTFILES_DIR/git/gitattributes $HOME/.gitattributes
-ln -sf $DOTFILES_DIR/git/gitconfig $HOME/.gitconfig
-ln -sf $DOTFILES_DIR/git/gitignore_global $HOME/.gitignore_global
-ln -sf $DOTFILES_DIR/ghci $HOME/.ghci
-ln -sf $DOTFILES_DIR/clang-format $HOME/.clang-format
-ln -sf $DOTFILES_DIR/ignore $HOME/.ignore
-ln -sf $DOTFILES_DIR/compton.conf $XDG_CONFIG_HOME/compton.conf
-ln -sf $DOTFILES_DIR/flake8 $XDG_CONFIG_HOME/flake8
-ln -sf $DOTFILES_DIR/polybar $XDG_CONFIG_HOME/polybar/config
+echo "Done!"

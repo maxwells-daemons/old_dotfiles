@@ -41,18 +41,6 @@ autocmd BufWrite *.py :Semshi highlight
 " Just use text objects from pythonsense
 let g:is_pythonsense_suppress_motion_keymaps = 1
 
-" Use capital C for class text objects
-xmap <buffer> aC <Plug>(PythonsenseOuterClassTextObject)
-omap <buffer> aC <Plug>(PythonsenseOuterClassTextObject)
-xmap <buffer> iC <Plug>(PythonsenseInnerClassTextObject)
-omap <buffer> iC <Plug>(PythonsenseInnerClassTextObject)
-
-" Re-enable comment text object
-xmap <buffer> ac <Plug>(textobj-comment-a)
-omap <buffer> ac <Plug>(textobj-comment-a)
-xmap <buffer> ic <Plug>(textobj-comment-i)
-omap <buffer> ic <Plug>(textobj-comment-i)
-
 " Auto-activate poet and pipenv environments
 let g:poetv_auto_activate = 1
 

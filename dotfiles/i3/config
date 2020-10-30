@@ -1,6 +1,9 @@
 # i3 config file (v4)
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+### Startup ###
+# Tell systemd that i3 is running, for any units that depend on it
+exec --no-startup-id "systemctl --no-block --user start i3.target"
 
 ### Core ###
 # Modifier: Alt
@@ -12,7 +15,7 @@ floating_modifier $mod
 bindsym $mod+Shift+q kill
 
 # Start a terminal
-bindsym $mod+Return exec kitty --single-instance --config ~/.config/kitty/kitty.conf
+bindsym $mod+Return exec kitty --single-instance
 
 # Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -66,19 +69,7 @@ bindsym $mod+s focus child
 
 
 ### Rofi (program launcher) ###
-bindsym $mod+d exec \
-"rofi \
--show drun \
--async-pre-read 0 \
--i \
--matching glob \
--no-levenshtein-sort \
--sidebar-mode \
--modi drun,\
-scripts:~/.config/rofi_scripts/scripts.sh,\
-windows:~/.config/rofi_scripts/layouts.sh,\
-screens:~/.config/rofi_scripts/screenlayouts.sh,\
-ssh"
+bindsym $mod+d exec "rofi -show drun -no-history"
 
 
 ### Marks ###
@@ -106,36 +97,29 @@ for_window [title="I3SCRATCHPAD"] move window to scratchpad
 
 
 ### Workspaces ###
-set $workspaceLeft 1:browser
-set $workspaceMain 2:terminals
-set $workspaceRight 3:code
-set $workspace4 4:book
-set $workspace9 9:music
-set $workspace10 10:chat
-
 # Switch to workspace
-bindsym $mod+1 workspace $workspaceLeft
-bindsym $mod+2 workspace $workspaceMain
-bindsym $mod+3 workspace $workspaceRight
-bindsym $mod+4 workspace $workspace4
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace $workspace9
-bindsym $mod+0 workspace $workspace10
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
 
 # Move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $workspaceLeft
-bindsym $mod+Shift+2 move container to workspace $workspaceMain
-bindsym $mod+Shift+3 move container to workspace $workspaceRight
-bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace $workspace9
-bindsym $mod+Shift+0 move container to workspace $workspace10
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
 
 # Move workspace to other monitor: shift-G and shift-;
 bindsym $mod+Shift+semicolon move workspace to output right
@@ -178,65 +162,25 @@ mode "resize" {
 }
 
 
-### Autoexecs ###
-# Setups
-exec_always --no-startup-id ~/bin/for_robots/launch_bar.sh
-exec --no-startup-id unclutter --jitter 20
-exec --no-startup-id nm-applet
-exec --no-startup-id dockd --daemon
-exec_always --no-startup-id ~/bin/scripts/,load-webcam-settings.py
-
-# Programs
-exec --no-startup-id dropbox start
-
-# NOTE: change to new location when moving
-exec --no-startup-id "redshift-gtk -l 38:-122 -b 1.0:0.85"
-
-
-### Aesthetics ###
-font xft:Hack 10.5
-
-# %%base16_template: i3##colors %%
-## Base16 Gigavolt
-# Author: Aidan Swope (http://github.com/maxwells-daemons)
-#
-# You can use these variables anywhere in the i3 configuration file.
-
-set $base00 #202126
-set $base01 #2d303d
-set $base02 #5a576e
-set $base03 #a1d2e6
-set $base04 #cad3ff
-set $base05 #e9e7e1
-set $base06 #eff0f9
-set $base07 #f2fbff
-set $base08 #ff661a
-set $base09 #19f988
-set $base0A #ffdc2d
-set $base0B #f2e6a9
-set $base0C #fb6acb
-set $base0D #40bfff
-set $base0E #ae94f9
-set $base0F #6187ff
-
-# %%base16_template_end%%
-
-# Property Name         Border  BG      Text    Indicator Child Border
-client.focused          $base01 $base01 $base03 $base0C $base0F
-client.focused_inactive $base01 $base01 $base05 $base01 $base01
-client.unfocused        $base01 $base00 $base05 $base01 $base01
-client.urgent           $base08 $base08 $base00 $base08 $base08
-client.placeholder      $base00 $base00 $base05 $base00 $base00
-client.background       $base07
-
-# Borders
-gaps inner 5
-gaps outer 0
-new_window pixel 1
-
-
 ### Program settings ###
 for_window [class="TestGame"] floating enable
 for_window [window_role="GtkFileChooserDialog"] floating enable, resize set 1280 800
 for_window [class="Matplotlib"] floating enable
 for_window [class="Dynalist"] move scratchpad; scratchpad show
+
+### Aesthetics ###
+font pango:Lato 12
+
+# Property Name             Border  BG      Text    Indicator   Child Border
+client.focused              #2d303d #2d303d #ffdc2d #ffdc2d     #f2e6a9
+client.unfocused            #2d303d #2d303d #e9e6e1 #5a576e     #2d303d
+client.focused_inactive     #2d303d #2d303d #f2e6a9 #5a576e     #2d303d
+client.placeholder          #2d303d #2d303d #e9e6e1 #5a576e     #2d303d
+client.urgent               #2d303d #2d303d #ff661a #ff661a     #ff661a
+client.background           #fff
+
+# Borders
+gaps inner 15
+gaps outer 0
+default_border pixel 2
+default_floating_border pixel 2

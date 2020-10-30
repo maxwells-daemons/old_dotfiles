@@ -1,0 +1,9 @@
+[Unit]
+Description=Dunst notification manager
+Type=dbus
+
+[Service]
+ExecStart=dunst
+
+[Install]
+WantedBy=xsession.target

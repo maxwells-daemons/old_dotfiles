@@ -1,8 +1,0 @@
-[Unit]
-Description=If eGPU is available on boot, link its xorg conf
-
-[Service]
-ExecStart=/home/whillikers/bin/for_robots/egpu/link_config.sh
-
-[Install]
-WantedBy=multi-user.target

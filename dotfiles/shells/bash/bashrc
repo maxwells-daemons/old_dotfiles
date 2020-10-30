@@ -1,0 +1,15 @@
+#
+# ~/.bashrc
+# Configures bash interactive shells.
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# Set the prompt
+PS1='[\u@\h \W]\$ '
+
+# Load the generic interactive shell config.
+source ~/.config/shells/generic/interactive.sh
+export PM_PACKAGES_ROOT=$HOME/packman-repo
+

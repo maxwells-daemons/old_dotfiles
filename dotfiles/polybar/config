@@ -1,0 +1,46 @@
+[base-bar]
+background = #202126
+foreground = #e9e7e1
+
+height = 60
+border-bottom-size = 2
+border-bottom-color = #5a576e
+padding = 1
+module-margin = 1
+tray-maxsize = 40
+
+font-0 = FiraCode-Regular:size=26;6
+
+[bar/horizontal]
+inherit = base-bar
+monitor = DP-2
+modules-left = i3
+modules-right = date pulseaudio
+tray-position = right
+
+[bar/vertical]
+inherit = base-bar
+monitor = DP-0
+modules-left = i3
+
+[module/i3]
+type = internal/i3
+pin-workspaces = true
+label-focused-foreground = #40bfff
+label-urgent-foreground = #ff661a
+
+[module/date]
+type = internal/date
+label =  %time% %date%
+date = %m/%d/%Y
+time = %I:%M
+
+[module/pulseaudio]
+type = internal/pulseaudio
+format-volume = <bar-volume>
+label-muted = Muted
+label-muted-foreground = #cad3ff
+bar-volume-width = 10
+bar-volume-empty = —
+bar-volume-indicator = —
+bar-volume-fill = %{F#f00}—%{F-}

@@ -1,6 +1,9 @@
 """ This vimrc is a small 'core' of modifications relevant to both vim and
 """ neovim. For full editing tasks, use nvim, configured in ~/.config/nvim.
 
+" Disable vi compatibility
+set nocompatible
+
 """ Begin with tpope's vim-sensible (already run in neovim config)
 if !has('nvim')
     runtime! plugin/sensible.vim
@@ -13,8 +16,17 @@ endif
 " set ruler " Show window measurements in the bottom right
 " set wildmenu " Visual autocomplete for command menu
 
+""" Compatibility with XDG Base Directory scheme
+" See: https://wiki.archlinux.org/index.php/XDG_Base_Directory
+if !has('nvim')
+    set undodir=$XDG_DATA_HOME/vim/undo
+    set directory=$XDG_DATA_HOME/vim/swap
+    set backupdir=$XDG_DATA_HOME/vim/backup
+    set viewdir=$XDG_DATA_HOME/vim/view
+    set viminfo+='1000,n$XDG_DATA_HOME/vim/viminfo
+endif
+
 """ General
-set nocompatible  " Disable vi compatibility
 set modelines=0 " Disable modelines for security reasons
 set mouse=a " Enable mouse support
 set hidden " Enable background buffers
@@ -24,6 +36,9 @@ set undodir=~/.vim/undo " Set undo directory
 set ffs=unix,dos,mac " Default to Unix line endings
 set backupcopy=yes " Modify files in place
 set updatetime=300 " Write swap files to disk every 300ms
+
+" Fix rendering with Kitty (see: https://github.com/kovidgoyal/kitty/issues/108)
+let &t_ut=''
 
 " Use system clipboard
 set clipboard=unnamed
@@ -41,6 +56,9 @@ set timeoutlen=1000
 if has('arabic')
     set noarabicshape
 endif
+
+" Disable all conceals on the cursor line
+set concealcursor=
 
 """ Mappings
 " Use <Space> as the leader
@@ -117,6 +135,7 @@ set number " Show current line number
 set relativenumber " Use relative line numbers for all other numbers
 set cursorline " Highlight the current line
 set colorcolumn=80  " Show a column on line 80
+set foldcolumn=1  " 1-character fold column
 
 set noerrorbells " Disable audio bell
 set novisualbell " Disable visual bell

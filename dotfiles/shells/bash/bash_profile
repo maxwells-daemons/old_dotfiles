@@ -1,0 +1,13 @@
+#
+# ~/.bash_profile
+# Configures bash login shells.
+#
+
+# Set generic environment variables
+source ~/.config/shells/generic/env.sh
+
+# If interactive, load ~/.bashrc
+source ~/.bashrc
+
+# Continue with the generic login shell
+source ~/.config/shells/generic/login.sh

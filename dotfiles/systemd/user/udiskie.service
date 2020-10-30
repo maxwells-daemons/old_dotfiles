@@ -1,0 +1,9 @@
+[Unit]
+Description=udiskie automounter
+Type=dbus
+
+[Service]
+ExecStart=udiskie
+
+[Install]
+WantedBy=xsession.target

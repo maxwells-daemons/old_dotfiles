@@ -1,6 +1,4 @@
 """ Set up concealing
-let g:indentLine_enabled=0 " Disable indentLine conceal functionality
-let g:indentLine_setColors=0 " Disable indentLine colors
 setlocal conceallevel=0 " Disable conceal
 
 " Fix conceal color

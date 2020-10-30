@@ -1,0 +1,8 @@
+[Unit]
+Description=Unclutter
+
+[Service]
+ExecStart=unclutter --jitter 20
+
+[Install]
+WantedBy=xsession.target

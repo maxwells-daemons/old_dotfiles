@@ -1,8 +1,0 @@
-[user]
-	name = maxwells-daemons
-	email = aidanswope@gmail.com
-[core]
-	excludesfile = ~/.gitignore_global
-    editor = nvim
-[pull]
-    rebase = true

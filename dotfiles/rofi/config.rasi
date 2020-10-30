@@ -1,0 +1,17 @@
+configuration {
+    modi: "drun,run,ssh,calc";
+	width: 30;
+	lines: 15;
+    terminal: "kitty --single-instance";
+	font: "Fira Code 18";
+	bw: 2;
+	drun-show-actions: true;
+	sort: true;
+	sorting-method: "fzf";
+	sidebar-mode: true;
+	parse-hosts: true;
+	matching: "fuzzy";
+	scroll-method: 1;
+	kb-primary-paste: "Control+V,Control+Shift+V,Shift+Insert";
+}
+@import "~/.config/rofi/theme.rasi"
