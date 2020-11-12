@@ -97,10 +97,10 @@ if !has('nvim')
 endif
 
 " Move between splits with <Ctrl>-HJKL
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+nmap <C-j> <C-W>j
+nmap <C-k> <C-W>k
+nmap <C-h> <C-W>h
+nmap <C-l> <C-W>l
 
 " Return to last edit position when opening files
 " From: https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim

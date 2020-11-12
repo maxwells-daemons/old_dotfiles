@@ -6,6 +6,9 @@
 ### Basic environment variables
 export EDITOR=nvim
 
+### Set up path
+export PATH=$PATH:${HOME}/.local/bin:${HOME}/bin/scripts
+
 ### Set up XDG base directory
 export XDG_CONFIG_HOME=${HOME}/.config
 export XDG_CACHE_HOME=${HOME}/.cache
@@ -46,5 +49,19 @@ export PYENV_ROOT=${XDG_DATA_HOME}/pyenv
 export IPYTHONDIR=${XDG_CONFIG_HOME}/jupyter
 export JUPYTER_CONFIG_DIR=${XDG_CONFIG_HOME}/jupyter
 
-### Path setup
-export PATH=$PATH:${HOME}/.local/bin:${HOME}/bin/scripts
+# VS Code
+export VSCODE_PORTABLE=${XDG_DATA_HOME}/vscode
+
+# Lean tools (Elan and Mathlib)
+export ELAN_HOME=${XDG_DATA_HOME}/elan
+export MATHLIB_CACHE_DIR=${XDG_CACHE_HOME}/mathlib
+export PATH=$PATH:${XDG_DATA_HOME}/elan/bin
+
+# Ruby (Gem and Bundler)
+export GEM_HOME=${XDG_DATA_HOME}/gem
+export GEM_SPEC_CACHE=${XDG_CACHE_HOME}/gem
+export PATH=$PATH:${XDG_DATA_HOME}/gem/bin
+
+export BUNDLE_USER_CONFIG=${XDG_CONFIG_HOME}/bundle
+export BUNDLE_USER_CACHE=${XDG_CACHE_HOME}/bundle
+export BUNDLE_USER_PLUGIN=${XDG_DATA_HOME}/bundle

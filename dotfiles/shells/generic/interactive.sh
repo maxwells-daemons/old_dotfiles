@@ -9,6 +9,7 @@ alias diff='diff --color=auto'
 alias grep='grep --color=auto'
 alias ip='ip --color=auto'
 alias wget='wget --hsts-file=${XDG_CACHE_HOME}/wget-hsts'
+alias protoc_python="PYENV_VERSION=tools python -m grpc.tools.protoc"
 
 # Fix allowing coc-python to use (hardcoded) system paths for tooling and
 # virtualenv paths for libraries (via :CocCommand python.setInterpreter).

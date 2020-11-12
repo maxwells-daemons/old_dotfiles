@@ -58,6 +58,7 @@ ln -sfnv ${DOTFILES_DIR}/rofi       ${XDG_CONFIG_HOME}/rofi
 ln -sfnv ${DOTFILES_DIR}/systemd    ${XDG_CONFIG_HOME}/systemd
 ln -sfnv ${DOTFILES_DIR}/X11        ${XDG_CONFIG_HOME}/X11
 ln -sfnv ${DOTFILES_DIR}/yay        ${XDG_CONFIG_HOME}/yay
+ln -sfnv ${DOTFILES_DIR}/tmux       ${XDG_CONFIG_HOME}/tmux
 echo
 
 echo "Linking other files"

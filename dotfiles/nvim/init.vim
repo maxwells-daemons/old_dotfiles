@@ -26,6 +26,7 @@
 "       - f: Auto-format a block of text
 "       - =/+: Increment or decrement a number, swap True/False, +/-, ...
 "       - Space: toggle a checkbox
+"       - l (in insert mode): insert a unicode character with Latex
 "   - Leader: UI actions
 "       - c/v: Open a horizontal/vertical split
 "       - q/l: Toggle the quickfix/loclist windows
@@ -37,6 +38,10 @@
 "       - t: Toggle the tag viewer (Vista)
 "       - g: Open the Git wrapper (Fugitive)
 "       - h: Toggle the undo history viewer (Mundo)
+"       - Enter: Paste selected text in another terminal (vim-slime)
+"       - s: Open a scratchpad
+"           - Normal mode: open the scratchpad, saving text.
+"           - Select mode: replace the scratchpad contents with the selection.
 "       - w: Wiki actions
 "           - ww: Open the default wiki index
 "           - ws: Select and open a wiki index
@@ -75,6 +80,9 @@ source ~/.vim/vimrc
 " Tags are stored locally
 set tags=./tags
 
+" Set up python path
+let g:python3_host_prog = "$XDG_DATA_HOME/pyenv/versions/tools/bin/python"
+
 " Treat all tex files as latex
 let g:tex_flavor = "latex"
 
@@ -108,6 +116,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'tpope/vim-commentary' " ctrl-c to toggle comments
     Plug 'justinmk/vim-sneak' " Motion to jump to a location, bound to s
     Plug 'Konfekt/vim-CtrlXA' " Allow 'incrementing/decrementing' many things
+    Plug 'joom/latex-unicoder.vim' " C-l in insert mode to type unicode via latex
 
     """ Text objects
     Plug 'wellle/targets.vim' " Seek to text objects for pairs and separators
@@ -122,6 +131,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'Xuyuanp/nerdtree-git-plugin' " Integrate git with NERDTree
     Plug 'junegunn/fzf' " Fuzzy-finder
     Plug 'junegunn/fzf.vim' " Integrates fzf with vim
+    Plug 'mtth/scratch.vim' " Create scratch buffers
 
     """ Tools
     Plug 'tpope/vim-fugitive' " Git wrapper
@@ -132,6 +142,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'honza/vim-snippets' " Builtin snippets
     Plug 'godlygeek/tabular' " Line up text with :Tabularize
     Plug 'vimwiki/vimwiki' " Markdown wiki links & todolists
+    Plug 'jpalardy/vim-slime' " Run commands in a terminal
 
     """ Aesthetics
     Plug 'vim-airline/vim-airline' " Status line
@@ -291,6 +302,11 @@ omap af <Plug>(coc-funcobj-a)
 
 """ Configure suda
 let g:suda_smart_edit = 1 " Allow automatically opening files with sudo
+
+""" Configure scratch
+let g:scratch_no_mappings = 1
+nmap <leader>s :Scratch<CR>
+xmap <leader>s <plug>(scratch-selection-clear)
 
 """ Configure better-whitespace
 autocmd BufEnter * EnableStripWhitespaceOnSave " Strip whitespace on save
@@ -471,3 +487,24 @@ let g:vimwiki_tags_header_level = 2
 let g:vimwiki_links_header = 'All Links'
 let g:vimwiki_links_header_level = 2
 let g:vimwiki_key_mappings = {'table_mappings': 0} " Keep tab mapping
+
+""" Configure unicoder
+" Cancel default mappings
+let g:unicoder_cancel_normal = 1
+let g:unicoder_cancel_insert = 1
+let g:unicoder_cancel_visual = 1
+
+" Bind <C-l> to unicoder in insert mode
+inoremap <C-l> <Esc>:call unicoder#start(1)<CR>
+
+""" Configure vim-slime
+let g:slime_target = "kitty"
+let g:slime_no_mappings = 1
+let g:slime_default_config = {"window_id": ""}
+xmap <silent> <leader><CR> <Plug>SlimeRegionSend
+nmap <silent> <leader><CR> <Plug>SlimeParagraphSend
+
+function SlimeOverrideSend(config, text)
+    call system("kitty @ --to $KITTY_LISTEN_ON send-text --match id:"
+                \ . shellescape(a:config["window_id"]) . " " . shellescape(a:text))
+endfunction

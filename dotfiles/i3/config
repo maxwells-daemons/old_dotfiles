@@ -81,9 +81,6 @@ bindsym $mod+m exec ~/bin/for_robots/i3/mark.sh
 # Unmark
 bindsym $mod+Shift+m [con_id="__focused__"] unmark; border pixel 1
 
-# Paste clipboard in window marked "a" and return to current window
-bindsym --release $mod+Control+m exec "sleep 0.1; ~/bin/for_robots/i3/pastemark.sh"
-
 # Read 1 character and jump to the window with the character
 bindsym $mod+apostrophe exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 
