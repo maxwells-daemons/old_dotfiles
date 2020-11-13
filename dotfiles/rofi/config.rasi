@@ -1,5 +1,5 @@
 configuration {
-    modi: "drun,run,ssh,calc,tmux:/home/aidan/bin/for_robots/rofi/tmux.sh";
+    modi: "drun,run,ssh,tmux:/home/aidan/bin/for_robots/rofi/tmux.sh,calc";
 	width: 30;
 	lines: 15;
     terminal: "kitty --single-instance";

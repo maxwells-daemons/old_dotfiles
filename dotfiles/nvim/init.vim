@@ -89,14 +89,6 @@ let g:tex_flavor = "latex"
 " Escape exits insert mode in terminal
 tnoremap <Esc> <C-\><C-n>
 
-" Remember folds on entering/leaving a buffer
-" See https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
-augroup remember_folds
-  autocmd!
-  autocmd BufWinLeave * silent! mkview
-  autocmd BufWinEnter * silent! loadview
-augroup END
-
 """ Aesthetics
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1 " Enable true-color support
 set showmode! " Do not show current mode (overwrites vimrc default)
@@ -127,7 +119,7 @@ call plug#begin(stdpath('data') . '/plugged')
     """ Window and file management
     Plug 'drmingdrmer/vim-toggle-quickfix' " Toggle quickfix and loclist
     Plug 'qpkorr/vim-bufkill' " :BD to close a buffer without closing the split
-    Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'} " Directory browser
+    Plug 'preservim/nerdtree' " Directory browser
     Plug 'Xuyuanp/nerdtree-git-plugin' " Integrate git with NERDTree
     Plug 'junegunn/fzf' " Fuzzy-finder
     Plug 'junegunn/fzf.vim' " Integrates fzf with vim
@@ -478,7 +470,6 @@ let g:vimwiki_list = [{'path': '~/media/documents/vimwiki/',
             \           'auto_generate_links': 1,
             \           'links_space_char': '-'}]
 let g:vimwiki_filetypes = ['markdown', 'pandoc'] " Pandoc compatibility
-let g:vimwiki_auto_chdir = 1 " Automatically change root to the wiki dir
 
 " Configure styles for auto-generated headers
 let g:vimwiki_markdown_header_style = 0
@@ -490,6 +481,7 @@ let g:vimwiki_key_mappings = {'table_mappings': 0} " Keep tab mapping
 
 """ Configure unicoder
 " Cancel default mappings
+let g:unicoder_no_map = 1
 let g:unicoder_cancel_normal = 1
 let g:unicoder_cancel_insert = 1
 let g:unicoder_cancel_visual = 1
