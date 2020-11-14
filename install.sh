@@ -22,6 +22,10 @@ ln -sfv ${DOTFILES_DIR}/shells/bash/bash_profile ${HOME}/.bash_profile
 ln -sfv ${DOTFILES_DIR}/shells/bash/bashrc ${HOME}/.bashrc
 echo
 
+echo "Configuring zsh"
+ln -sfv ${DOTFILES_DIR}/shells/zsh/zshenv-home ${HOME}/.zshenv
+echo
+
 echo "Configuring vim"
 mkdir -pv ${XDG_DATA_HOME}/vim/undo
 mkdir -pv ${XDG_DATA_HOME}/vim/swap

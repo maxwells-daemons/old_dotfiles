@@ -1,0 +1,10 @@
+#
+# ~/.zshenv
+# Bootstrap zsh config loading.
+#
+
+# Load the rest of the config from ~/.config/shells/zsh
+export ZDOTDIR=${HOME}/.config/shells/zsh
+
+# Continue with ~/.config/shells/zsh/.zshenv
+source ${HOME}/.config/shells/zsh/.zshenv

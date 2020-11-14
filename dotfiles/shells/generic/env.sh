@@ -44,6 +44,7 @@ export CUDA_CACHE_PATH=${XDG_CACHE_HOME}/nv
 
 # Pyenv
 export PYENV_ROOT=${XDG_DATA_HOME}/pyenv
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # Jupyter
 export IPYTHONDIR=${XDG_CONFIG_HOME}/jupyter
