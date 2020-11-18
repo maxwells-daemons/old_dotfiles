@@ -67,5 +67,6 @@ echo
 
 echo "Linking other files"
 ln -sfv $BASE_DIR/other-files/webcam-settings.txt ${XDG_CONFIG_HOME}/webcam-settings.txt
+ln -sfv ${DOTFILES_DIR}/ignore ${XDG_CONFIG_HOME}/ignore
 
 echo "Done!"

@@ -83,11 +83,17 @@ antigen bundles <<EOBUNDLES
     pip
     ripgrep
 
+    # fasd integration
+    fasd
+
     # Suggest commands as you type
     zsh-users/zsh-autosuggestions
 
     # Syntax highlighting in the shell
-    zsh-users/zsh-syntax-highlighting
+    zdharma/fast-syntax-highlighting
+
+    # Fish-style up-arrow history searching
+    zsh-users/zsh-history-substring-search
 
     # Add more completion definitions
     zsh-users/zsh-completions
@@ -97,12 +103,41 @@ EOBUNDLES
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 
+# fasd
+export _FASD_DATA=${XDG_DATA_HOME}/fasd
+
+
 # Powerlevel10K theme
 antigen theme romkatv/powerlevel10k
 
 # Apply changes
 antigen apply
 
+### colored-man-pages
+# bold & blinking mode
+less_termcap[mb]="${fg_bold[blue]}"
+less_termcap[md]="${fg_bold[blue]}"
+# underlining
+less_termcap[us]="${fg_bold[yellow]}"
+# standout mode
+less_termcap[so]="${fg_bold[black]}${bg[green]}"
+
+### fast-syntax-highlighting
+FAST_HIGHLIGHT_STYLES[path]='fg=blue'
+FAST_HIGHLIGHT_STYLES[path-to-dir]='fg=blue,bold'
+FAST_HIGHLIGHT_STYLES[globbing]='fg=magenta,bold'
+FAST_HIGHLIGHT_STYLES[history-expansion]='fg=magenta,bold'
+FAST_HIGHLIGHT_STYLES[mathvar]='fg=magenta,bold'
+
 ### Powerlevel10k prompt
 # Load the prompt
 [[ ! -f ~/.config/shells/zsh/.p10k.zsh ]] || source ~/.config/shells/zsh/.p10k.zsh
+
+### zsh-history-substring-search
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='standout'
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black'
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+
+### Restore clobbered vim alias
+alias v='PYENV_VERSION=system nvim'

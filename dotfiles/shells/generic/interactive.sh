@@ -14,7 +14,6 @@ alias protoc_python='PYENV_VERSION=tools python -m grpc.tools.protoc'
 # Fix allowing coc-python to use (hardcoded) system paths for tooling and
 # virtualenv paths for libraries (via :CocCommand python.setInterpreter).
 alias nvim='PYENV_VERSION=system nvim'
-alias v='PYENV_VERSION=system nvim'
 
 # Kitty
 if [ $TERM = "xterm-kitty" ]; then
