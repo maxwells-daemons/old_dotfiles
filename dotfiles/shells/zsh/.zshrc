@@ -139,5 +139,8 @@ HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black'
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
+### Pyenv completion
+source /usr/share/zsh/site-functions/_pyenv
+
 ### Restore clobbered vim alias
 alias v='PYENV_VERSION=system nvim'

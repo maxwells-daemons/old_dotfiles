@@ -6,6 +6,9 @@
 # Set generic environment variables
 source ~/.config/shells/generic/env.sh
 
+# bash-specific environment variables
+export HISTFILE=${XDG_DATA_HOME}/bash/history
+
 # If interactive, load ~/.bashrc
 source ~/.bashrc
 

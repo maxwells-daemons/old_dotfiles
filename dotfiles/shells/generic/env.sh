@@ -22,8 +22,8 @@ export XAUTHORITY=${XDG_RUNTIME_DIR}/Xauthority
 export XINITRC=${XDG_CONFIG_HOME}/X11/xinitrc
 export XSERVERRC=${XDG_CONFIG_HOME}/X11/xserverrc
 
-# bash
-export HISTFILE=${XDG_DATA_HOME}/bash/history
+# ssh-agent
+export SSH_AUTH_SOCK=${XDG_RUNTIME_DIR}/ssh-agent.socket
 
 # less
 export LESSKEY=${XDG_CONFIG_HOME}/less/lesskey
@@ -66,3 +66,6 @@ export PATH=$PATH:${XDG_DATA_HOME}/gem/bin
 export BUNDLE_USER_CONFIG=${XDG_CONFIG_HOME}/bundle
 export BUNDLE_USER_CACHE=${XDG_CACHE_HOME}/bundle
 export BUNDLE_USER_PLUGIN=${XDG_DATA_HOME}/bundle
+
+# Docker
+export DOCKER_CONFIG=${XDG_CONFIG_HOME}/docker
