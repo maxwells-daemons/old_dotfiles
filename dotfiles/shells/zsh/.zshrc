@@ -66,7 +66,7 @@ DISABLE_UPDATE_PROMPT=true
 DISABLE_AUTO_UPDATE=true
 
 # Try to correct unrecognized command names and filenames
-ENABLE_CORRECTION=true
+ENABLE_CORRECTION=false
 
 # Speed up VCS status checks
 DISABLE_UNTRACKED_FILES_DIRTY=true
@@ -99,13 +99,25 @@ antigen bundles <<EOBUNDLES
     zsh-users/zsh-completions
 EOBUNDLES
 
-# zsh-autosuggestions
+### zsh-autosuggestions
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 
+# Speed up pasting by disabling autosuggest
+# https://github.com/zsh-users/zsh-autosuggestions/issues/238
+pasteinit() {
+  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+  zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+}
+
+pastefinish() {
+  zle -N self-insert $OLD_SELF_INSERT
+}
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
+
 # fasd
 export _FASD_DATA=${XDG_DATA_HOME}/fasd
-
 
 # Powerlevel10K theme
 antigen theme romkatv/powerlevel10k
@@ -128,6 +140,9 @@ FAST_HIGHLIGHT_STYLES[path-to-dir]='fg=blue,bold'
 FAST_HIGHLIGHT_STYLES[globbing]='fg=magenta,bold'
 FAST_HIGHLIGHT_STYLES[history-expansion]='fg=magenta,bold'
 FAST_HIGHLIGHT_STYLES[mathvar]='fg=magenta,bold'
+
+# Async highlighting for faster remote connections
+FAST_HIGHLIGHT[use_async]=1
 
 ### Powerlevel10k prompt
 # Load the prompt

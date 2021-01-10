@@ -329,6 +329,9 @@ let NERDTreeAutoDeleteBuffer = 1 " When we delete a file, also close its buffer
 " Ignore some files
 let NERDTreeIgnore = ['\.pyc$', '__pycache__$[[dir]]']
 
+" Move bookmarks to XDG_DATA_HOME
+let NERDTreeBookmarksFile = "~/.local/share/NERDTreeBookmarks"
+
 " Set up Git symbols
 let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "!",

@@ -1,8 +1,9 @@
 #!/bin/sh
 
 # Configure monitors
-xrandr 	--output DP-2 --mode 3840x2160 --pos 0x1680 --primary \
-        --output DP-0 --mode 3840x2160 --pos 3840x0 --rotate left
+xrandr \
+    --output DP-2 --mode 3840x2160 --pos 2160x1680 --rotate normal --primary \
+    --output DP-0 --mode 3840x2160 --pos 0x0       --rotate left
 
 # Read Xresources
 xrdb -merge ${XDG_CONFIG_HOME}/X11/Xresources
