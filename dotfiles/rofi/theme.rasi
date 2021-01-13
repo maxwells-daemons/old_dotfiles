@@ -1,6 +1,6 @@
 * {
-    selected-normal-foreground:  #ffdc2d;
-    foreground:                  #e9e7e1;
+    foreground:                  #575f66;
+    selected-normal-foreground:  #0a0e14;
     normal-foreground:           @foreground;
     alternate-normal-background: @normal-background;
     selected-urgent-foreground:  rgba ( 248, 248, 242, 100 % );
@@ -9,33 +9,34 @@
     active-foreground:           rgba ( 166, 226, 42, 100 % );
     selected-active-foreground:  rgba ( 166, 226, 42, 100 % );
     alternate-active-background: @active-background;
-    background:                  #2d303d;
+    background:                  #fafafa;
     alternate-normal-foreground: @foreground;
     normal-background:           rgba ( 39, 40, 34, 0 % );
     selected-normal-background:  @normal-background;
-    border-color:                #f2e6a9;
-    separatorcolor:              #2d303d;
+    border-color:                #f0f0f0;
+    separatorcolor:              @normal-background;
     urgent-background:           rgba ( 39, 40, 34, 0 % );
     selected-urgent-background:  rgba ( 249, 38, 114, 100 % );
     alternate-urgent-foreground: @urgent-foreground;
-    background-color:            #2d303d;
+    background-color:            @background;
     alternate-active-foreground: @active-foreground;
     active-background:           rgba ( 39, 40, 34, 0 % );
     selected-active-background:  rgba ( 20, 20, 17, 100 % );
+    highlight: bold;
 }
 #window {
     background-color: @background;
-    border:           1;
-    padding:          5;
+    border:           2;
+    padding:          10;
 }
 #mainbox {
     border:  0;
-    padding: 0;
+    padding: 10;
 }
 #message {
     border:       2px 0px 0px ;
     border-color: @separatorcolor;
-    padding:      1px ;
+    padding:      10px ;
 }
 #textbox {
     text-color: @foreground;
@@ -50,7 +51,11 @@
 }
 #element {
     border:  0;
-    padding: 1px ;
+    padding: 1px;
+}
+#element-icon {
+    size: 2ch;
+    padding: 5px;
 }
 #element.normal.normal {
     background-color: @normal-background;
@@ -99,12 +104,12 @@
     border-color: @separatorcolor;
 }
 #button.selected {
-    background-color: @selected-normal-background;
-    text-color:       @selected-normal-foreground;
+    background-color: @normal-background;
+    text-color:       @selected-foreground;
 }
 #button.normal {
-    background-color: @selected-normal-background;
-    text-color:       #cad3ff;
+    background-color: @normal-background;
+    text-color:       @normal-foreground;
 }
 #inputbar {
     spacing:    0;
@@ -121,7 +126,7 @@
 }
 #prompt {
     spacing:    0;
-    text-color: #f2e6a9;
+    text-color: #f18d3e;
 }
 #inputbar {
     children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
@@ -130,5 +135,5 @@
     expand:     false;
     str:        ":";
     margin:     0px 0.3em 0em 0em ;
-    text-color: @normal-foreground;
+    text-color: #f18d3e;
 }

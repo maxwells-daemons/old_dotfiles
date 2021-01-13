@@ -69,7 +69,7 @@ bindsym $mod+s focus child
 
 
 ### Rofi (program launcher) ###
-bindsym $mod+d exec "rofi -show drun -no-history"
+bindsym $mod+d exec "rofi -show drun -no-persist-history -hint-welcome Result:"
 
 
 ### Marks ###
@@ -165,11 +165,11 @@ for_window [window_role="GtkFileChooserDialog"] floating enable, resize set 1280
 for_window [class="Matplotlib"] floating enable
 for_window [class="Dynalist"] move scratchpad; scratchpad show
 
-### Aesthetics ###
-font pango:Lato 12
+### Aesthetics & Colors ###
+font pango:Custom Regular Iosevka Fixed 14
 
 # Property Name             Border  BG      Text    Indicator   Child Border
-client.focused              #2d303d #2d303d #ffdc2d #ffdc2d     #f2e6a9
+client.focused              #2d303d #2d303d #ffdc2d #89DDFF     #82AAFF
 client.unfocused            #2d303d #2d303d #e9e6e1 #5a576e     #2d303d
 client.focused_inactive     #2d303d #2d303d #f2e6a9 #5a576e     #2d303d
 client.placeholder          #2d303d #2d303d #e9e6e1 #5a576e     #2d303d

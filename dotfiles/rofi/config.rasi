@@ -1,9 +1,9 @@
 configuration {
     modi: "drun,run,ssh,tmux:/home/aidan/bin/for_robots/rofi/tmux.sh,calc";
-	width: 30;
+	width: 20;
 	lines: 15;
     terminal: "kitty --single-instance";
-	font: "Fira Code 18";
+	font: "Custom Regular Iosevka Fixed 20";
 	bw: 2;
 	drun-show-actions: true;
 	sort: true;
@@ -13,5 +13,7 @@ configuration {
 	matching: "fuzzy";
 	scroll-method: 1;
 	kb-primary-paste: "Control+V,Control+Shift+V,Shift+Insert";
+    show-icons: true;
+    icon-theme: "Flat-Remix-Blue";
 }
 @import "~/.config/rofi/theme.rasi"

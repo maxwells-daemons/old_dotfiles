@@ -3,7 +3,7 @@ Description=udiskie automounter
 Type=dbus
 
 [Service]
-ExecStart=udiskie
+ExecStart=udiskie --tray
 
 [Install]
 WantedBy=xsession.target

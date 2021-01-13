@@ -69,3 +69,6 @@ export BUNDLE_USER_PLUGIN=${XDG_DATA_HOME}/bundle
 
 # Docker
 export DOCKER_CONFIG=${XDG_CONFIG_HOME}/docker
+
+# GTK
+GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc

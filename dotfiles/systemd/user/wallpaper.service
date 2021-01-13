@@ -3,7 +3,7 @@ Description="Set the wallpaper"
 
 [Service]
 Type=oneshot
-ExecStart=feh --no-fehbg --bg-fill ${HOME}/media/images/wallpapers/scrapyard.png ${HOME}/media/images/wallpapers/scott-uminga-veins-of-gold.jpg
+ExecStart=feh --no-fehbg --bg-fill ${HOME}/media/images/wallpapers/cppn-circle-2.png ${HOME}/media/images/wallpapers/scott-uminga-veins-of-gold.jpg
 
 [Install]
 WantedBy=xsession.target
