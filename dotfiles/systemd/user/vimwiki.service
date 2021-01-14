@@ -1,0 +1,8 @@
+[Unit]
+Description=Vimwiki
+
+[Service]
+ExecStart=kitty --override "cursor #dc322f" --name=vimwiki nvim -c "colorscheme flattened_light" -c "highlight Sneak guifg=red guibg=none ctermfg=red ctermbg=none" -c "VimwikiIndex"
+
+[Install]
+WantedBy=i3.target

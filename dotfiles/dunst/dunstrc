@@ -175,7 +175,7 @@
 [low]
     msg_urgency = low
     background = "#fafafa"
-    foreground = "#abb0b6"
+    foreground = "#575f66"
     separator_color = "#f0f0f0"
     frame_color = "#f0f0f0"
 

@@ -1,12 +1,11 @@
 configuration {
     modi: "drun,run,ssh,tmux:/home/aidan/bin/for_robots/rofi/tmux.sh,calc";
-	width: 20;
 	lines: 15;
     terminal: "kitty --single-instance";
 	font: "Custom Regular Iosevka Fixed 20";
 	bw: 2;
 	drun-show-actions: true;
-	sort: true;
+	sort: false;
 	sorting-method: "fzf";
 	sidebar-mode: true;
 	parse-hosts: true;

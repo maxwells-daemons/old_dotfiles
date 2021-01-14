@@ -17,7 +17,7 @@ font-1 = FontAwesome5Free:style=Solid:size=20;6
 [bar/horizontal]
 inherit = base-bar
 monitor = DP-2
-modules-left = i3
+modules-left = i3 vimwiki
 modules-center =  date pulseaudio cpu memory gpu
 modules-right =
 tray-position = right
@@ -33,6 +33,11 @@ pin-workspaces = true
 label-focused-foreground = #fa8d3e
 label-urgent-foreground = #f51818
 reverse-scroll = false
+
+[module/vimwiki]
+type = custom/text
+content=
+click-left = i3-msg '[instance="vimwiki"] scratchpad show'
 
 [module/date]
 type = internal/date

@@ -143,6 +143,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'kshenoy/vim-signature' " Display marks in gutter
     Plug 'nathanaelkane/vim-indent-guides' " Display indent levels
     Plug 'RRethy/vim-illuminate' " Highlight the word under the cursor
+    Plug 'romainl/flattened' " Solarized colorscheme
 
     """ Plaintext and Markdown
     Plug 'vim-pandoc/vim-pandoc', {'for': ['markdown', 'pandoc', 'vim', 'vimwiki']} " Document converter

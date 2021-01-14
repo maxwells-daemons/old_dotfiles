@@ -28,6 +28,7 @@
     background-color: @background;
     border:           2;
     padding:          10;
+    width: 1000;
 }
 #mainbox {
     border:  0;
@@ -125,6 +126,7 @@
     text-color: @normal-foreground;
 }
 #prompt {
+    enabled: false;
     spacing:    0;
     text-color: #f18d3e;
 }
@@ -132,6 +134,7 @@
     children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
 }
 #textbox-prompt-colon {
+    enabled: false;
     expand:     false;
     str:        ":";
     margin:     0px 0.3em 0em 0em ;
