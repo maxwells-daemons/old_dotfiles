@@ -54,13 +54,14 @@ label-muted =   0%
 [module/memory]
 type = internal/memory
 format = <label>
-label =  %percentage_used:2%%
+label = %{A1:i3-msg '[instance="bar-htop"] scratchpad show':} %percentage_used:2%%%{A}
 
 [module/cpu]
 type = internal/cpu
-label =  %percentage:2%%
+label = %{A1:i3-msg '[instance="bar-htop"] scratchpad show':} %percentage:2%%%{A}
 
 [module/gpu]
 type = custom/script
 exec = ~/bin/for_robots/polybar/nvidia-smi.sh
 interval = 1
+click-left = i3-msg '[instance="bar-nvtop"] scratchpad show'

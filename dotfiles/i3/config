@@ -86,15 +86,22 @@ bindsym $mod+apostrophe exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: 
 
 
 ### Scratchpad ###
-bindsym $mod+p [instance="^(?!.*vimwiki)"] scratchpad show
+bindsym $mod+p [instance="^(?!.*vimwiki)(?!.*bar-htop)(?!.*bar-nvtop)"] scratchpad show
 bindsym $mod+Shift+p move scratchpad
 
 for_window [instance="scratchpad"] move window to scratchpad
 for_window [title="I3SCRATCHPAD"] move window to scratchpad
 
+### Special scratchpad windows
 # Alt+n for wiki tab
 bindsym $mod+n [instance="vimwiki"] scratchpad show
 for_window [instance="vimwiki"] move window to scratchpad, resize set 2000 1597
+
+# htop
+for_window [instance="bar-htop"] move window to scratchpad
+
+# nvtop
+for_window [instance="bar-nvtop"] move window to scratchpad, resize set 1300 800
 
 ### Workspaces ###
 # Switch to workspace

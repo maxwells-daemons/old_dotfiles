@@ -1,0 +1,9 @@
+[Unit]
+Description=htop hidden window for status bar
+
+[Service]
+ExecStart=kitty --name=bar-htop htop
+Restart=always
+
+[Install]
+WantedBy=i3.target

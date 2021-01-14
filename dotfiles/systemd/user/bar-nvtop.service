@@ -1,0 +1,9 @@
+[Unit]
+Description=nvtop hidden window for status bar
+
+[Service]
+ExecStart=kitty --name=bar-nvtop nvtop
+Restart=always
+
+[Install]
+WantedBy=i3.target
