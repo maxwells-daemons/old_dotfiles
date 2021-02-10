@@ -39,9 +39,6 @@
 "       - g: Open the Git wrapper (Fugitive)
 "       - h: Toggle the undo history viewer (Mundo)
 "       - Enter: Paste selected text in another terminal (vim-slime)
-"       - s: Open a scratchpad
-"           - Normal mode: open the scratchpad, saving text.
-"           - Select mode: replace the scratchpad contents with the selection.
 "       - w: Wiki actions
 "           - ww: Open the default wiki index
 "           - ws: Select and open a wiki index
@@ -95,6 +92,7 @@ set showmode! " Do not show current mode (overwrites vimrc default)
 set signcolumn=yes " Keep sign column open
 set shortmess+=c " Squash completion-menu echoes
 set concealcursor= " Disable all conceals on the cursor line
+colorscheme base16-gigavolt " Set colorscheme
 
 """ Plugins
 filetype off " Temporarily disable filetype plugins
@@ -123,7 +121,6 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'Xuyuanp/nerdtree-git-plugin' " Integrate git with NERDTree
     Plug 'junegunn/fzf' " Fuzzy-finder
     Plug 'junegunn/fzf.vim' " Integrates fzf with vim
-    Plug 'mtth/scratch.vim' " Create scratch buffers
 
     """ Tools
     Plug 'tpope/vim-fugitive' " Git wrapper
@@ -295,11 +292,6 @@ omap af <Plug>(coc-funcobj-a)
 
 """ Configure suda
 let g:suda_smart_edit = 1 " Allow automatically opening files with sudo
-
-""" Configure scratch
-let g:scratch_no_mappings = 1
-nmap <leader>s :Scratch<CR>
-xmap <leader>s <plug>(scratch-selection-clear)
 
 """ Configure better-whitespace
 autocmd BufEnter * EnableStripWhitespaceOnSave " Strip whitespace on save

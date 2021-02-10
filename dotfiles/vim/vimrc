@@ -4,17 +4,77 @@
 " Disable vi compatibility
 set nocompatible
 
-""" Begin with tpope's vim-sensible (already run in neovim config)
+""" Begin with tpope/vim-sensible equivalents (already run in neovim config)
 if !has('nvim')
-    runtime! plugin/sensible.vim
-endif
+    set autoindent
+    set backspace=indent,eol,start
+    set complete-=i
+    set smarttab
 
-" Settings contained within vim-sensible:
-" set encoding=utf8 " Set utf8 as the standard encoding
-" set backspace=indent,eol,start " Sane backspace behavior
-" set incsearch " Highlight matches before search is complete
-" set ruler " Show window measurements in the bottom right
-" set wildmenu " Visual autocomplete for command menu
+    set nrformats-=octal
+
+    if !has('nvim') && &ttimeoutlen == -1
+      set ttimeout
+      set ttimeoutlen=100
+    endif
+
+    set incsearch
+    " Use <C-L> to clear the highlighting of :set hlsearch.
+    if maparg('<C-L>', 'n') ==# ''
+      nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+    endif
+
+    set laststatus=2
+    set ruler
+    set wildmenu
+
+    if !&scrolloff
+      set scrolloff=1
+    endif
+    if !&sidescrolloff
+      set sidescrolloff=5
+    endif
+    set display+=lastline
+
+    if &encoding ==# 'latin1' && has('gui_running')
+      set encoding=utf-8
+    endif
+
+    if &listchars ==# 'eol:$'
+      set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+    endif
+
+    if v:version > 703 || v:version == 703 && has("patch541")
+      set formatoptions+=j " Delete comment character when joining commented lines
+    endif
+
+    if has('path_extra')
+      setglobal tags-=./tags tags-=./tags; tags^=./tags;
+    endif
+
+    if &shell =~# 'fish$' && (v:version < 704 || v:version == 704 && !has('patch276'))
+      set shell=/usr/bin/env\ bash
+    endif
+
+    set autoread
+
+    if &history < 1000
+      set history=1000
+    endif
+    if &tabpagemax < 50
+      set tabpagemax=50
+    endif
+    if !empty(&viminfo)
+      set viminfo^=!
+    endif
+    set sessionoptions-=options
+    set viewoptions-=options
+
+    " Allow color schemes to do bright colors without forcing bold.
+    if &t_Co == 8 && $TERM !~# '^Eterm'
+      set t_Co=16
+    endif
+endif
 
 """ Compatibility with XDG Base Directory scheme
 " See: https://wiki.archlinux.org/index.php/XDG_Base_Directory
@@ -129,7 +189,6 @@ set termguicolors " Enable GUI colors in terminal mode
 set showcmd  " Show partial commands in the bottom bar
 syntax on " Enable syntax highlighting
 set t_Co=256 " Enable 256 colors
-colorscheme base16-gigavolt " Set colorscheme
 set showmode " Show current mode (NOTE: overwritten in nvim config)
 set number " Show current line number
 set relativenumber " Use relative line numbers for all other numbers
@@ -139,20 +198,3 @@ set foldcolumn=1  " 1-character fold column
 
 set noerrorbells " Disable audio bell
 set novisualbell " Disable visual bell
-
-""" Plugins (configured separately for Vim and Neovim)
-if !has('nvim')
-    filetype off  " Temporarily disable filetype plugins
-    call plug#begin('~/.vim/plugged')
-        Plug 'tpope/vim-sensible' " Sensible starting defaults
-        Plug 'ntpeters/vim-better-whitespace' " Whitespace stripping on save
-        Plug 'Raimondi/delimitMate' " Autocomplete parentheses, etc
-    call plug#end()
-    filetype plugin indent on " Enable filetype plugins and indent files
-
-    """ Configure vim-better-whitespace
-    autocmd BufEnter * EnableStripWhitespaceOnSave  " Strip whitespace on save
-    autocmd BufEnter * DisableWhitespace " Disable whitespace highlighting
-    let g:strip_whitespace_confirm=0 " Do not ask before stripping whitespace
-    let g:show_spaces_that_precede_tabs=1 " Show spaces around tabs
-endif
