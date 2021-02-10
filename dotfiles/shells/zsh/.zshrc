@@ -158,4 +158,4 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 source /usr/share/zsh/site-functions/_pyenv
 
 ### Restore clobbered vim alias
-alias v='PYENV_VERSION=system nvim'
+alias v=nvim

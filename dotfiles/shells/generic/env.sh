@@ -42,6 +42,9 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 # CUDA
 export CUDA_CACHE_PATH=${XDG_CACHE_HOME}/nv
 
+# Jax
+export XLA_FLAGS=--xla_gpu_cuda_data_dir=/opt/cuda
+
 # Pyenv
 export PYENV_ROOT=${XDG_DATA_HOME}/pyenv
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1

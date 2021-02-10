@@ -1,0 +1,3 @@
+[submodule "dotfiles/tmux/tmux-sensible"]
+	path = dotfiles/tmux/tmux-sensible
+	url = https://github.com/tmux-plugins/tmux-sensible

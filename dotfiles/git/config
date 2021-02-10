@@ -3,5 +3,6 @@
 	email = aidanswope@gmail.com
 [core]
 	editor = vim
+    excludesfile = /home/aidan/.config/git/gitignore-global
 [pull]
 	rebase = true

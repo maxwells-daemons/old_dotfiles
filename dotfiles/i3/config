@@ -101,7 +101,7 @@ for_window [instance="vimwiki"] move window to scratchpad, resize set 2000 1597
 for_window [instance="bar-htop"] move window to scratchpad
 
 # nvtop
-for_window [instance="bar-nvtop"] move window to scratchpad, resize set 1300 800
+for_window [instance="bar-nvtop"] move window to scratchpad, resize set 1500 1200
 
 ### Workspaces ###
 # Switch to workspace
@@ -170,10 +170,10 @@ mode "resize" {
 
 
 ### Program settings ###
-for_window [class="TestGame"] floating enable
 for_window [window_role="GtkFileChooserDialog"] floating enable, resize set 1280 800
 for_window [class="Matplotlib"] floating enable
 for_window [class="Dynalist"] move scratchpad; scratchpad show
+for_window [class="Bitwarden"] floating enable
 
 ### Aesthetics & Colors ###
 font pango:Custom Regular Iosevka Fixed 14
