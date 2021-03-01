@@ -42,6 +42,9 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 # CUDA
 export CUDA_CACHE_PATH=${XDG_CACHE_HOME}/nv
 
+# Python
+export PYTHONHISTFILE=${XDG_DATA_HOME}/python/python_history
+
 # Jax
 export XLA_FLAGS=--xla_gpu_cuda_data_dir=/opt/cuda
 
@@ -74,4 +77,7 @@ export BUNDLE_USER_PLUGIN=${XDG_DATA_HOME}/bundle
 export DOCKER_CONFIG=${XDG_CONFIG_HOME}/docker
 
 # GTK
-GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
+export GTK2_RC_FILES=${XDG_CONFIG_HOME}/gtk-2.0/gtkrc
+
+# pkg
+export PKG_CACHE_PATH=${XDG_CACHE_HOME}/pkg
