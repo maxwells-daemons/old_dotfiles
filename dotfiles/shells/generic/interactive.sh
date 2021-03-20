@@ -24,6 +24,3 @@ if [ $TERM = "xterm-kitty" ]; then
 	alias clip='kitty +kitten clipboard'
 	alias pasteclip='kitty +kitten clipboard --get-clipboard'
 fi
-
-# Pyenv
-eval "$(pyenv init -)"

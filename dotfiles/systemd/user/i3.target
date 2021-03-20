@@ -1,3 +1,0 @@
-[Unit]
-Description=i3 is running
-BindsTo=graphical-session.target

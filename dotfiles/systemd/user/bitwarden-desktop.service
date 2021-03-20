@@ -1,8 +1,0 @@
-[Unit]
-Description=Bitwarden Desktop
-
-[Service]
-ExecStart=bitwarden-desktop
-
-[Install]
-WantedBy=xsession.target

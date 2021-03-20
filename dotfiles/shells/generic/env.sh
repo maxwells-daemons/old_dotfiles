@@ -17,11 +17,6 @@ export XDG_DATA_DIRS=/usr/local/share:/usr/share
 export XDG_CONFIG_DIRS=/etc/xdg
 
 ### Configure programs
-# X
-export XAUTHORITY=${XDG_RUNTIME_DIR}/Xauthority
-export XINITRC=${XDG_CONFIG_HOME}/X11/xinitrc
-export XSERVERRC=${XDG_CONFIG_HOME}/X11/xserverrc
-
 # ssh-agent
 export SSH_AUTH_SOCK=${XDG_RUNTIME_DIR}/ssh-agent.socket
 

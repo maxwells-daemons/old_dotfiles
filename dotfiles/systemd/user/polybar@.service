@@ -1,9 +1,0 @@
-[Unit]
-Description="Run polybar with a templated bar name"
-
-[Service]
-Type=simple
-ExecStart=polybar %i
-
-[Install]
-WantedBy=i3.target

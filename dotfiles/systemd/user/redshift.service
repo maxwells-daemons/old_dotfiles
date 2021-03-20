@@ -1,8 +1,0 @@
-[Unit]
-Description=Redshift
-
-[Service]
-ExecStart=redshift-gtk -l 38:-122 -b 1.0:0.85
-
-[Install]
-WantedBy=xsession.target

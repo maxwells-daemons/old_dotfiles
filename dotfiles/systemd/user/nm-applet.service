@@ -1,8 +1,0 @@
-[Unit]
-Description=Network manager applet
-
-[Service]
-ExecStart=nm-applet
-
-[Install]
-WantedBy=xsession.target

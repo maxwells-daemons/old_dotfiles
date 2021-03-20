@@ -51,24 +51,15 @@ fi
 echo
 
 echo "Linking XDG config directories"
-ln -sfnv ${DOTFILES_DIR}/alsa       ${XDG_CONFIG_HOME}/alsa
-ln -sfnv ${DOTFILES_DIR}/dunst      ${XDG_CONFIG_HOME}/dunst
 ln -sfnv ${DOTFILES_DIR}/git        ${XDG_CONFIG_HOME}/git
 ln -sfnv ${DOTFILES_DIR}/htop       ${XDG_CONFIG_HOME}/htop
-ln -sfnv ${DOTFILES_DIR}/i3         ${XDG_CONFIG_HOME}/i3
 ln -sfnv ${DOTFILES_DIR}/kitty      ${XDG_CONFIG_HOME}/kitty
 ln -sfnv ${DOTFILES_DIR}/npm        ${XDG_CONFIG_HOME}/npm
-ln -sfnv ${DOTFILES_DIR}/picom      ${XDG_CONFIG_HOME}/picom
-ln -sfnv ${DOTFILES_DIR}/polybar    ${XDG_CONFIG_HOME}/polybar
-ln -sfnv ${DOTFILES_DIR}/rofi       ${XDG_CONFIG_HOME}/rofi
 ln -sfnv ${DOTFILES_DIR}/systemd    ${XDG_CONFIG_HOME}/systemd
-ln -sfnv ${DOTFILES_DIR}/X11        ${XDG_CONFIG_HOME}/X11
-ln -sfnv ${DOTFILES_DIR}/yay        ${XDG_CONFIG_HOME}/yay
 ln -sfnv ${DOTFILES_DIR}/tmux       ${XDG_CONFIG_HOME}/tmux
 echo
 
 echo "Linking other files"
-ln -sfv $BASE_DIR/other-files/webcam-settings.txt ${XDG_CONFIG_HOME}/webcam-settings.txt
 ln -sfv ${DOTFILES_DIR}/ignore ${XDG_CONFIG_HOME}/ignore
 
 echo "Done!"
