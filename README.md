@@ -1,3 +1,1 @@
-# dotfiles
-
-My personal dotfiles and associated scripts.
+Old dotfiles. For current ones, see https://github.com/maxwells-daemons/dotfiles.
